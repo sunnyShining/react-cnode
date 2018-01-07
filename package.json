@@ -1,0 +1,62 @@
+{
+  "name": "react-demo",
+  "description": "A ant-design Project",
+  "author": "sunny<17765293970@163.com>",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "PORT=9992 roadhog server",
+    "build:stg": "export NODE_ENV=staging && roadhog build",
+    "build:prd": "export NODE_ENV=production && roadhog build",
+    "lint": "eslint --ext .js src test",
+    "precommit": "npm run lint",
+    "new": "yo ./tools/yo/react-demo-add/app/index.js"
+  },
+  "engines": {
+    "install-node": "6.11.1"
+  },
+  "dependencies": {
+    "antd": "lastest",
+    "babel-runtime": "^6.9.2",
+    "dva": "^2.0.4",
+    "dva-loading": "^1.0.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-plugin-import": "^1.6.2",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "expect": "^1.20.2",
+    "husky": "^0.12.0",
+    "lodash": "^4.17.4",
+    "mockjs": "^1.0.1-beta3",
+    "moment": "^2.19.1",
+    "redbox-react": "^1.4.3",
+    "roadhog": "^1.2.1",
+    "yazl": "^2.4.3",
+    "yeoman-generator": "^2.0.1",
+    "yo": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnyShining/react-demo.git"
+  },
+  "keywords": [
+    "ant-design"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunnyShining/react-demo/issues"
+  },
+  "homepage": "https://github.com/sunnyShining/react-demo#readme"
+}
