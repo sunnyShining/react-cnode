@@ -10,7 +10,7 @@ import React, { Component } from 'react';
 import { connect } from 'dva';
 import PropTypes from 'prop-types';
 import { Button, Menu, Icon } from 'antd';
-import services from '../../services/services.js';
+import services from '../../services/services';
 import './IndexPage.less';
 
 const SubMenu = Menu.SubMenu;
@@ -30,11 +30,11 @@ class IndexPage extends Component {
         });
     }
     testMock = () => {
-        services.users().then((data) => {
+        services.topics().then((data) => {
             console.log(data);
-            for (let i = 0; i < data.data.length; i += 1) {
-                console.log(i);
-            }
+            // for (let i = 0; i < data.data.length; i += 1) {
+            //     console.log(i);
+            // }
         }, error => {
             console.log(error);
         });

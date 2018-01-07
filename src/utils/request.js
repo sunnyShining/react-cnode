@@ -12,11 +12,7 @@ import Loading from '../components/Loading/index';
 function checkStatus(response) {
     const type = response.headers.get('Content-Type');
     if (response.status >= 200 && response.status < 300) {
-        if (type.indexOf('application/json') !== -1) {
-            return response.json();
-        } else {
-            return response.text();
-        }
+        return response.json();
     } else {
         // const error = {
         //     code: '123456',

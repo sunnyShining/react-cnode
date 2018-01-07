@@ -125,7 +125,7 @@ body {
     color: #333;
     font-family: Arial, "Microsoft YaHei";
     background-color: #e1e1e1;
-    font-size: 0.28rem;
+    font-size: 14px;
     line-height: 1.4;
     -webkit-text-size-adjust: none;
 }
@@ -151,9 +151,9 @@ input,
 select {
     user-select: initial;
     font-family: Arial, "Microsoft YaHei";
-    font-size: 0.24rem;
+    font-size: 12px;
     border: none;
-    height: 0.45rem;
+    height: 22px;
     width: 100%;
     display: inline-block;
 }
@@ -189,7 +189,7 @@ input,img {
 
 label,input,.select{
     user-select:initial;
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
 }
 
 a{
@@ -233,7 +233,4 @@ input:disabled{
 
 .tc {
     text-align: center;
-}
-.testimg {
-    background-image: url('../images/yay.jpg');
 }

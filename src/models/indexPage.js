@@ -11,7 +11,7 @@ import services from '../services/services.js';
 export default {
 	namespace: 'indexPage',
 	state: {
-		users: [],
+		topics: {},
 	},
     // 订阅事件
 	subscriptions: {
@@ -27,13 +27,13 @@ export default {
 	},
 
 	effects: {
-		* fetchUsers({ payload }, { call, put }) {
-			const data = yield call(services.users, payload); // 请求数据
+		* fetchTopics({ payload }, { call, put }) {
+			const data = yield call(services.topics, payload); // 请求数据
 			yield put(
 				{
 					type: 'save',
 					payload: {
-						users: data, // 存数据
+						topics: data, // 存数据
 					},
 				}); // 触发reducers save函数
 		},
@@ -41,9 +41,6 @@ export default {
 	reducers: {
 		save(state, action) {
 			return { ...state, ...action.payload }; // 存数据
-		},
-		fetchUsers(state, action) {
-			return { ...state, ...action.payload };
 		},
 	},
 };

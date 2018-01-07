@@ -1,29 +1,83 @@
+@import url('../../assets/css/variables.less');
+
 .header{
     box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    height: 5vh;
-    background-color: #fff;
-    z-index: 999;
+    background-color: @bg-gray;
+    height: 50px;
+    padding-left: 48px;
+    .logo{
+        width: 122px;
+        line-height: 50px;
+        text-align: center;
+        float: left;
+    }
+    .search{
+        width: 235px;
+        line-height: 50px;
+        padding-left: 20px;
+        float: left;
+        input{
+            width: 100%;
+            height: 28px;
+            background-color: #888;
+            border-radius: 28px;
+            background: url("@{img-path}search.png") 4px 4px no-repeat @bg-gray2;
+        }
+    }
+    .tab {
+        float: right;
+        line-height: 50px;
+        padding: 0 20px 0 34px;
+        display: flex;
+        flex-wrap: wrap;
+        a{
+            white-space: nowrap;
+            color: @c-dark;
+            display: block;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bolder;
+        }
+        a:nth-child(1){
+            width: 55px;
+        }
+        a:nth-child(2){
+            width: 80px;
+        }
+        a:nth-child(3){
+            width: 56px;
+        }
+        a:nth-child(4){
+            width: 54px;
+        }
+        a:nth-child(5){
+            width: 40px;
+        }
+        a:nth-child(6){
+            width: 55px;
+        }
+    }
+    &:after{
+        clear: both;
+    }
 }
-.sider{
-    width: 224px;
-    background: #3e3e3e;
-    position: absolute;
-    overflow: visible;
-    // padding-bottom: 24px;
-    height: 90vh;
-    transition: all 0.3s ease-out;
-    box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
-    color: #999;
-}
-.content{
-    margin-left: 224px;
-    overflow: auto;
-    height: 90vh;
-    transition: all 0.3s ease-out;
-}
+// .sider{
+//     width: 224px;
+//     background: #3e3e3e;
+//     position: absolute;
+//     overflow: visible;
+//     // padding-bottom: 24px;
+//     height: 90vh;
+//     transition: all 0.3s ease-out;
+//     box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
+//     color: #999;
+// }
+// .content{
+//     margin-left: 224px;
+//     overflow: auto;
+//     height: 90vh;
+//     transition: all 0.3s ease-out;
+// }
 .footer{
     height: 5vh;
     line-height: 48px;

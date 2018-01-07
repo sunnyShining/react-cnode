@@ -18,7 +18,7 @@ export default {
                 method: 'GET',
                 mode: 'cors',
                 credentials: 'include',
-                body: JSON.stringify(options),
+                // body: JSON.stringify(options),
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {

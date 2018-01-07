@@ -27,14 +27,29 @@ class App extends Component {
       		<div>
 				{/* <Spin size="large" tip="Loading..." spinning={loading.global}>*/}
 					<Layout>
-						<Header className="header">
-							<div className="logo">1213</div>
-						</Header>
+						<div className="header">
+							<div className="logo">
+							    <a className="brand" href="/">
+      								<img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="logo" />
+  								</a>
+							</div>
+							<div className="search">
+                				<input type="search" autoComplete="off" name="" />
+            				</div>
+            				<div className="tab">
+				                <a>首页</a>
+				                <a>新手入门</a>
+				                <a>API</a>
+				                <a>关于</a>
+				                <a>注册</a>
+				                <a>登录</a>
+				            </div>
+						</div>
 						<Layout>
-							<Sider className="sider">Sider</Sider>
 							<Content className="content">
 								<div>{ this.props.children }</div>
 							</Content>
+							<Sider className="sider">Sider</Sider>
 						</Layout>
 						<Footer className="footer">Footer</Footer>
 					</Layout>
