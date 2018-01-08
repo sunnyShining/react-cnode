@@ -13,6 +13,8 @@ import createLoading from 'dva-loading'; // 引入loading
 import createHistory from 'history/createBrowserHistory';
 import flexible from 'flexible'; // 引入flexible.js
 import './assets/css/reset.css';
+import './assets/css/bootstrap.min.css';
+import './assets/css/style.less';
 
 // 1. Initialize
 const app = dva({

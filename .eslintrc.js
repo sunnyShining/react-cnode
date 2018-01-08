@@ -24,6 +24,8 @@ module.exports = {
         "no-restricted-syntax": [0],
         "no-use-before-define": [0],
         "react/forbid-prop-types": [0],
+        "react/self-closing-comp": [0],
+        "react/jsx-no-target-blank": [0],
         "react/jsx-filename-extension": [1, { "extensions": [".js", "jsx"] }], // 允许文件为.js和.jsx的扩展名
         "react/jsx-no-bind": [0],
         "react/prefer-stateless-function": [0],
