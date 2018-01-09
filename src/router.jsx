@@ -20,16 +20,16 @@ function RouterConfig({ history, app }) {
 	});
 	const routes = [
 	    {
-            path: '/indexPage',
-		    models: () => [import('./models/indexPage.js')],
-	        component: () => import('./routes/IndexPage/IndexPage.jsx'),
+            path: '/index',
+		    models: () => [import('./models/index.js')],
+	        component: () => import('./routes/Index/Index.jsx'),
 	    },
 	];
     return (
       <ConnectedRouter history={history}>
         <App>
           <Switch>
-            <Route exact path="/" render={() => (<Redirect to="/indexPage" />)} />
+            <Route exact path="/" render={() => (<Redirect to="/index" />)} />
             {
             	routes.map(({ path, ...dynamics }, key) => (
               		<Route key={key}

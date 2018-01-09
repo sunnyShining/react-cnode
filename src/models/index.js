@@ -1,26 +1,29 @@
 /**
  * @author sunny
  * @email 17765293970@163.com
- * @create date 2017-11-17 09:57:09
- * @modify date 2017-11-17 09:57:09
+ * @create date 2018-01-09 22:57:09
+ * @modify date 2018-01-09 22:57:09
  * @desc index页面redux
 */
 
 import services from '../services/services.js';
 
 export default {
-	namespace: 'indexPage',
+	namespace: 'index',
 	state: {
-		topics: {},
+		topics: [],
 	},
     // 订阅事件
 	subscriptions: {
         // 开始初始化时执行
 		setup({ dispatch, history }) {
 			dispatch({
-                type: 'fetchUsers',
+                type: 'fetchTopics',
                 payload: {
-                    name: 'sunnylovesnow',
+                	page: 1,
+                	tab: 'all',
+                	limit: 40,
+                    mdrender: true,
                 },
             }); // 执行effects里actions
 		},
@@ -33,7 +36,7 @@ export default {
 				{
 					type: 'save',
 					payload: {
-						topics: data, // 存数据
+						topics: data.data || [], // 存数据
 					},
 				}); // 触发reducers save函数
 		},

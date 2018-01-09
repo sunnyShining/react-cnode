@@ -37,6 +37,7 @@ module.exports = {
         "semi": [2, "always"],
         "no-tabs": 0,
         "no-new": 0,
+        "max-len": 0,
         "no-param-reassign": "off",
         "func-names": "off",
         "no-mixed-spaces-and-tabs": 0,
