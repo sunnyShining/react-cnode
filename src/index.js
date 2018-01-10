@@ -15,6 +15,7 @@ import flexible from 'flexible'; // 引入flexible.js
 import './assets/css/reset.css';
 import './assets/css/bootstrap.min.css';
 import './assets/css/style.less';
+import './assets/css/responsive.css';
 
 // 1. Initialize
 const app = dva({

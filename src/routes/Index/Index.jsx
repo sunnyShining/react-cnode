@@ -1,56 +1,41 @@
 /**
  * @author sunny
  * @email 17765293970@163.com
- * @create date 2017-11-17 09:59:06
- * @modify date 2017-11-17 09:59:06
+ * @create date 2018-01-10 22:59:06
+ * @modify date 2018-01-10 22:59:06
  * @desc index页面
 */
 
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import PropTypes from 'prop-types';
-import { Button, Menu, Icon } from 'antd';
-import services from '../../services/services';
+import classnames from 'classnames';
 import './Index.less';
-
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 class IndexPage extends Component {
 	constructor(props) {
-        console.log(props);
 		super(props);
 		this.state = {
-			current: 'mail',
+			currentTag: 'all',
 		};
 	}
-    handleClick = (e) => {
-        console.log('click ', e);
+    changeTag = (tag) => {
         this.setState({
-            current: e.key,
-        });
-    }
-    testMock = () => {
-        services.topics().then((data) => {
-            console.log(data);
-            // for (let i = 0; i < data.data.length; i += 1) {
-            //     console.log(i);
-            // }
-        }, error => {
-            console.log(error);
+            currentTag: tag,
         });
     }
     render() {
         let { topics } = this.props.index;
+        let { currentTag } = this.state;
         return (
             <div className="panel">
                 <div className="header">
-                    <a href="/?tab=all" className="topic-tab current-tab">全部</a>
-                    <a href="/?tab=good" className="topic-tab ">精华</a>
-                    <a href="/?tab=share" className="topic-tab ">分享</a>
-                    <a href="/?tab=ask" className="topic-tab ">问答</a>
-                    <a href="/?tab=job" className="topic-tab ">招聘</a>
-                    <a href="/?tab=dev" className="topic-tab ">客户端测试</a>
+                    <a onClick={() => this.changeTag('all')} className={classnames('topic-tab', { 'current-tab': currentTag === 'all' })}>全部</a>
+                    <a onClick={() => this.changeTag('good')} className={classnames('topic-tab', { 'current-tab': currentTag === 'good' })}>精华</a>
+                    <a onClick={() => this.changeTag('share')} className={classnames('topic-tab', { 'current-tab': currentTag === 'share' })}>分享</a>
+                    <a onClick={() => this.changeTag('ask')} className={classnames('topic-tab', { 'current-tab': currentTag === 'ask' })}>问答</a>
+                    <a onClick={() => this.changeTag('job')} className={classnames('topic-tab', { 'current-tab': currentTag === 'job' })}>招聘</a>
+                    <a onClick={() => this.changeTag('dev')} className={classnames('topic-tab', { 'current-tab': currentTag === 'dev' })}>客户端测试</a>
                 </div>
                 <div className="inner no-padding">
                     <div id="topic_list">
