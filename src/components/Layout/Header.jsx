@@ -7,26 +7,31 @@
 */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
 	render() {
 		return (
             <div className="navbar">
                 <div className="navbar-inner">
                     <div className="container">
-                        <a className="brand" href="/">
+                        <Link className="brand" to="/">
                             <img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="logo" />
-                        </a>
+                        </Link>
                         <form id="search_form" className="navbar-search" action="/search">
                             <input type="text" id="q" name="q" className="search-query span3" value="" />
                         </form>
                         <ul className="nav pull-right">
-                            <li><a href="/">首页</a></li>
-                            <li><a href="/getstart">新手入门</a></li>
-                            <li><a href="/api">API</a></li>
-                            <li><a href="/about" target="">关于</a></li>
-                            <li><a href="/signup">注册</a></li>
-                            <li><a href="/signin">登录</a></li>
+                            <li><Link to="/">首页</Link></li>
+                            <li><Link to="/getstart">新手入门</Link></li>
+                            <li><Link to="/api">API</Link></li>
+                            <li><Link to="/about" target="">关于</Link></li>
+                            <li><Link to="/signup">注册</Link></li>
+                            <li><Link to="/signin">登录</Link></li>
                         </ul>
                         <a className="btn btn-navbar" id="responsive-sidebar-trigger">
                             <span className="icon-bar"></span>
