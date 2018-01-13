@@ -5,7 +5,8 @@
   "scripts": {
     "start": "PORT=9992 node build/index.js start",
     "build": "node build/index.js build",
-    "test": "node build/index.js test --env=jsdom"
+    "test": "node build/index.js test --env=jsdom",
+    "new": "yo ./tools/yo/react-cnode-add/app/index.js"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -63,7 +64,9 @@
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
     "webpack-manifest-plugin": "1.3.2",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "yeoman-generator": "^2.0.2",
+    "yo": "^2.0.0"
   },
   "jest": {
     "collectCoverageFrom": [

@@ -15,6 +15,7 @@ import Test1 from '../Test1/test1.jsx';
 import Test2 from '../Test2/Test2.jsx';
 import NotFound from '../NoFound/NoFound.jsx';
 import Home from '../Home/Home.jsx';
+import Topic from '../Topic/Topic.jsx';
 
 const history = createHistory()
 
@@ -32,6 +33,7 @@ class App extends Component {
                                 <Route path='/test1' exact component={Test1}/>
                                 <Route path='/test2'  component={Test2}/>
                                 <Route path='/home'  component={Home}/>
+                                <Route path='/topic/:id'  component={Topic}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>

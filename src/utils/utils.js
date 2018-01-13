@@ -1,15 +1,3 @@
-/**
- * @param  {initState}
- * @param  {Object} handlers
- * @return {Reducer}
- */
-export function createReducer(initState, handlers) {
-    return function reducer(state = initState, action) {
-        const handler = handlers[action.type]
-        return handler ? handler(state, action) : state
-    }
-}
-
 export function fromNow (time) {
     let now = new Date();
     now = now.getTime();

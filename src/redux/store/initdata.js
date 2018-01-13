@@ -4,5 +4,8 @@ export default {
 	},
 	home: {
 		topics: [],
-	}
+	},
+	topic: {
+		topic: {},
+	},
 };

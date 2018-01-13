@@ -24,17 +24,14 @@ export default {
     },
     // get /topic/:id 主题详情
     topic(options = {}) {
+        let url = `${urls.topic}${options.id}`;
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'GET',
-                url: urls.topics,
-                qs: options,
-            }).then((data) => {
+                url,
+                qs: {},
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },

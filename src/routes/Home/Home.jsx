@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Link
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -93,9 +96,9 @@ class Home extends Component {
                                                     }
                                                 })()
                                             }
-                                            <a className="topic_title" href="/topic/5a2403226190c8912ebaceeb" title={item.title}>
+                                            <Link className="topic_title" to={`/topic/${item.id}`} title={item.title}>
                                                 { item.title }
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 );
