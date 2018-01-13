@@ -1,44 +1,61 @@
-/**
- * @author sunny
- * @email 17765293970@163.com
- * @create date 2017-11-17 09:58:18
- * @modify date 2017-11-17 09:58:18
- * @desc 入口页面
-*/
-
 import React, { Component } from 'react';
+import {
+  Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { connect } from 'dva';
-import { withRouter } from 'dva/router';
+import createHistory from 'history/createHashHistory'
+import app from '../../redux/actions/app';
 import { Header, Sider, Footer } from '../../components/Layout/index';
-import './App.less';
+import Test1 from '../Test1/test1.jsx';
+import Test2 from '../Test2/Test2.jsx';
+import NotFound from '../NoFound/NoFound.jsx';
+import Home from '../Home/Home.jsx';
+
+const history = createHistory()
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+	}
+    changeName = () => {
+        const { changeName } = this.props;
+        changeName(123);
+    }
     render() {
-		let { loading } = this.props;
-    	return (
-      		<div>
-      			<Header />
-				<div id="main">
-					<Sider />
-					<div id="content">
-						{ this.props.children }
-					</div>
-				</div>
-				<div id="backtotop">回到顶部</div>
-			    <Footer />
-      		</div>
-      	);
+        return (
+            <Router history={history}>
+                <div>
+                    <Header />
+                    <div id="main">
+                        <Sider />
+                        <div id="content">
+                            <Switch>
+                                <Route exact path="/" render={() => (<Redirect to="/home" />)} />
+                                <Route path='/test1' exact component={Test1}/>
+                                <Route path='/test2'  component={Test2}/>
+                                <Route path='/home'  component={Home}/>
+                                <Route component={NotFound}/>
+                            </Switch>
+                        </div>
+                    </div>
+                    <div id="backtotop">回到顶部</div>
+                    <Footer />
+                </div>
+            </Router>
+        );
     }
 }
 
-
 App.propTypes = {
-  // children: PropTypes.element.isRequired,
-  // location: PropTypes.object,
-  // dispatch: PropTypes.func,
-  // app: PropTypes.object,
-  loading: PropTypes.object,
-};
+    state: PropTypes.object,
+}
 
-export default withRouter(connect(({ app, loading }) => ({ app, loading }))(App));
+export default connect(
+    state => {return {...state.app}},
+    dispatch => bindActionCreators(app, dispatch)
+)(App)

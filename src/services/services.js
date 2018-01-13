@@ -1,41 +1,34 @@
 /**
  * @author sunny
  * @email 17765293970@163.com
- * @create date 2017-11-17 09:56:39
- * @modify date 2017-11-17 09:56:39
+ * @create date 2018-01-12 22:18:39
+ * @modify date 2018-01-12 22:18:39
  * @desc 接口请求
 */
 
-import { message } from 'antd';
-import request from '../utils/request';
+import utils from '../utils/http';
 import urls from './urls';
 
 export default {
     // get /topics 主题首页
     topics(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.topics, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                // body: JSON.stringify(options),
-            }).then((data) => {
+                url: urls.topics,
+                qs: options
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
     // get /topic/:id 主题详情
     topic(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.topics, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.topics,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -48,11 +41,10 @@ export default {
     // post /topics 新建主题
     newTopics(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.newTopics, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.newTopics,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -65,11 +57,10 @@ export default {
     // post /topics/update 编辑主题
     update(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.update, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.update,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -82,11 +73,10 @@ export default {
     // post /topic_collect/collect 收藏主题
     collect(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.collect, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.collect,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -99,11 +89,10 @@ export default {
     // post /topic_collect/de_collect 取消主题
     deCollect(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.deCollect, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.deCollect,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -116,11 +105,10 @@ export default {
     // get /topic_collect/:loginname 用户所收藏的主题
     userCollect(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.userCollect, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.userCollect,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -133,11 +121,10 @@ export default {
     // post /topic/:topic_id/replies 新建评论
     replies(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.replies, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.replies,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -150,11 +137,10 @@ export default {
     // post /reply/:reply_id/ups 为评论点赞
     ups(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.ups, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.ups,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -167,11 +153,10 @@ export default {
     // get /user/:loginname 用户详情
     user(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.user, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.user,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -184,11 +169,10 @@ export default {
     // post /accesstoken 验证 accessToken 的正确性
     accesstoken(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.accesstoken, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.accesstoken,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -201,11 +185,10 @@ export default {
     // get /message/count 获取未读消息数
     count(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.count, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.count,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -218,11 +201,10 @@ export default {
     // get /messages 获取已读和未读消息
     messages(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.messages, {
+            utils.http.request({
                 method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.messages,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -235,11 +217,10 @@ export default {
     // post /message/mark_all 标记全部已读
     markAll(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.markAll, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.markAll,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {
@@ -252,11 +233,10 @@ export default {
     // post /message/mark_one/:msg_id 标记单个消息为已读
     markOne(options = {}) {
         return new Promise((resolve, reject) => {
-            request(urls.markOne, {
+            utils.http.request({
                 method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: JSON.stringify(options),
+                url: urls.markOne,
+                qs: options,
             }).then((data) => {
                 resolve(data);
             }).catch((error) => {

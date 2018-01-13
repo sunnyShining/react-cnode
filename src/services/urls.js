@@ -7,15 +7,11 @@
 */
 
 function hostName() {
-    if (ENV === 'development') {
+    if (process.env.NODE_ENV === 'development') {
         return {
             api: 'https://cnodejs.org/api/v1',
         };
-    } else if (ENV === 'staging') {
-        return {
-            api: 'https://cnodejs.org/api/v1',
-        };
-    } else if (ENV === 'production') {
+    } else if (process.env.NODE_ENV === 'production') {
         return {
             api: 'https://cnodejs.org/api/v1',
         };
