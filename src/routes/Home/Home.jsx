@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as home from '../../redux/actions/home';
+import { fromNow } from '../../utils/utils';
 
 class Home extends Component {
 	constructor(props) {
@@ -70,10 +71,28 @@ class Home extends Component {
                                         </span>
                                         <a className="last_time pull-right" href="/topic/5a2403226190c8912ebaceeb#5a52fec3a89c475d7ea4fada">
                                             {/* <img className="user_small_avatar" src="" alt="" /> */}
-                                            <span className="last_active_time">8 小时前</span>
+                                            <span className="last_active_time">{fromNow(item.last_reply_at)}</span>
                                         </a>
                                         <div className="topic_title_wrapper">
-                                            <span className="put_top">置顶</span>&nbsp;
+                                            {
+                                                (() => {
+                                                    if (item.top) {
+                                                        return (<span className="put_top">置顶&nbsp;</span>);
+                                                    } else if (item.good) {
+                                                        return (<span className="put_good">精华&nbsp;</span>);
+                                                    } else if (item.tab === 'share') {
+                                                        return (<span className="topiclist-tab">分享&nbsp;</span>);
+                                                    } else if (item.tab === 'ask') {
+                                                        return (<span className="topiclist-tab">问答&nbsp;</span>);
+                                                    } else if (item.tab === 'job') {
+                                                        return (<span className="topiclist-tab">工作&nbsp;</span>);
+                                                    } else if (item.tab === 'dev') {
+                                                        return (<span className="topiclist-tab">测试&nbsp;</span>);
+                                                    } else {
+                                                        return null;
+                                                    }
+                                                })()
+                                            }
                                             <a className="topic_title" href="/topic/5a2403226190c8912ebaceeb" title={item.title}>
                                                 { item.title }
                                             </a>
@@ -82,6 +101,18 @@ class Home extends Component {
                                 );
                             })
                         }
+                    </div>
+                    <div className="pagination" current_page="1">
+                        <ul>
+                            <li className="disabled"><a>«</a></li>
+                            <li className="disabled active"><a>1</a></li>
+                            <li><a href="/?tab=all&amp;page=2">2</a></li>
+                            <li><a href="/?tab=all&amp;page=3">3</a></li>
+                            <li><a href="/?tab=all&amp;page=4">4</a></li>
+                            <li><a href="/?tab=all&amp;page=5">5</a></li>
+                            <li><a>...</a></li>
+                            <li><a href="/?tab=all&amp;page=100">»</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
