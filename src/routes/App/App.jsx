@@ -19,13 +19,6 @@ import Home from '../Home/Home.jsx';
 const history = createHistory()
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-	}
-    changeName = () => {
-        const { changeName } = this.props;
-        changeName(123);
-    }
     render() {
         return (
             <Router history={history}>

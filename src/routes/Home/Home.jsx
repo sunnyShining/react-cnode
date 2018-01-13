@@ -29,6 +29,13 @@ class Home extends Component {
         this.setState({
             currentTag: tag,
         });
+        let options = {
+            page: 1,
+            tab: tag,
+            limit: 40,
+            mdrender: true,
+        };
+        this.fetchTopics(options);
     }
     render() {
     	let { topics } = this.props;

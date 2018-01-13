@@ -31,15 +31,15 @@ export default class Sider extends Component {
                 </div>
                 <div className="panel">
                     <div className="inner ads">
-                        <a href="https://alinode.aliyun.com/?ref=cnode" className="banner sponsor_outlink" data-label="alinode">
+                        <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" rel="noopener noreferrer" className="banner sponsor_outlink" data-label="alinode">
                             <img src="//dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_" alt="" />
                         </a>
                         <div className="sep10"></div>
-                        <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&amp;utm_medium=content_pic_pc&amp;utm_campaign=multicloud&amp;utm_content=gift&amp;ytag=cnodejs" target="_blank" className="banner sponsor_outlink" data-label="ucloud-banner">
+                        <a href="http://www.ucloud.cn/site/active/gift.html?utm_source=cnodejs&amp;utm_medium=content_pic_pc&amp;utm_campaign=multicloud&amp;utm_content=gift&amp;ytag=cnodejs" target="_blank" rel="noopener noreferrer" className="banner sponsor_outlink" data-label="ucloud-banner">
                             <img src="//dn-cnode.qbox.me/FgQS-GQDfqwAD_v0NuhyYUOUk5MG" alt="" />
                         </a>
                         <div className="sep10"></div>
-                        <a href="https://0x7.me/UDyj" className="banner sponsor_outlink" data-label="qiniu-sidebar">
+                        <a href="https://0x7.me/UDyj" className="banner sponsor_outlink" data-label="qiniu-sidebar" target="_blank" rel="noopener noreferrer">
                             <img src="//dn-cnode.qbox.me/Fv9R31Y6ySKKJi95ldk9TRkJ7o5O" alt="" />
                         </a>
                     </div>
@@ -94,25 +94,25 @@ export default class Sider extends Component {
                     <div className="inner">
                         <ol className="friendship-community">
                             <li>
-                                <a href="https://ruby-china.org/" target="_blank">
+                                <a href="https://ruby-china.org/" target="_blank" rel="noopener noreferrer">
                                     <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>
                             <li>
-                                <a href="http://golangtc.com/" target="_blank">
+                                <a href="http://golangtc.com/" target="_blank" rel="noopener noreferrer">
                                     <img src="//o4j806krb.qnssl.com/public/images/golangtc-logo.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>
                             <li>
-                                <a href="http://phphub.org/" target="_blank">
+                                <a href="http://phphub.org/" target="_blank" rel="noopener noreferrer">
                                     <img src="//o4j806krb.qnssl.com/public/images/phphub-logo.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>
                             <li>
-                                <a href="https://testerhome.com/" target="_blank">
+                                <a href="https://testerhome.com/" target="_blank" rel="noopener noreferrer">
                                     <img src="//dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK" alt="" />
                                 </a>
                             </li>
@@ -126,7 +126,7 @@ export default class Sider extends Component {
                     <div className="inner cnode-app-download">
                         <img width="200" src="//dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU" alt="" />
                         <br />
-                        <a href="https://github.com/soliury/noder-react-native" target="_blank">客户端源码地址</a>
+                        <a href="https://github.com/soliury/noder-react-native" target="_blank" rel="noopener noreferrer">客户端源码地址</a>
                     </div>
                 </div>
             </div>

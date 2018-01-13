@@ -30,7 +30,7 @@ Loading.newInstance = function newLoadingInstance(properties) {
     let props = properties || {};
     let div = document.createElement('div');
     document.body.appendChild(div);
-    let notification = ReactDOM.render(React.createElement(Loading, props), div);
+    ReactDOM.render(React.createElement(Loading, props), div);
     return {
         destroy() {
             ReactDOM.unmountComponentAtNode(div);

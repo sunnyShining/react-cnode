@@ -6,6 +6,8 @@
 # testing
 /coverage
 
+#production
+/dist
 
 # misc
 .DS_Store
