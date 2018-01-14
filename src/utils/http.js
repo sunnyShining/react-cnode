@@ -7,6 +7,14 @@
 import axios from 'axios';
 import Loading from '../components/Loading/index';
 
+// 请求拦截
+axios.interceptors.request.use(function (config) {
+    Loading.open();
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
 // 响应拦截（一般拦截登录，还有loading等）
 axios.interceptors.response.use(function (response) {
     // Do something with response data
@@ -28,7 +36,6 @@ export default {
 
     http: {
         request (options, cb) {
-            Loading.open();
             options.method = options.method && options.method.toLocaleUpperCase();
             if (!options.headers) {
                 options.headers = {};

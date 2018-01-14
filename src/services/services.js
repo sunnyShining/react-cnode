@@ -149,17 +149,14 @@ export default {
     },
     // get /user/:loginname 用户详情
     user(options = {}) {
+        let url = `${urls.user}${options.username}`;
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'GET',
-                url: urls.user,
-                qs: options,
-            }).then((data) => {
+                url,
+                qs: {},
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },

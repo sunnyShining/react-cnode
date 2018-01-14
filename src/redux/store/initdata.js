@@ -8,4 +8,7 @@ export default {
 	topic: {
 		topic: {},
 	},
+	user: {
+		userInfo: {},
+	},
 };
