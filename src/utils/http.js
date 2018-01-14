@@ -29,20 +29,20 @@ export default {
     http: {
         request (options, cb) {
             Loading.open();
+            options.method = options.method && options.method.toLocaleUpperCase();
             if (!options.headers) {
                 options.headers = {};
             }
-            if (options.method === 'GET' || options.method === 'get') {
+            if (options.method === 'GET') {
                 axios.get(options.url, {
                     params: options.qs,
                     headers: options.headers
                 }).then((res) => {
                     cb(res.data)
-                    // return '1';
                 }).catch((err) => {
                     cb(err);
                 });
-            } else if (options.method === 'POST' || options.method === 'post') {
+            } else if (options.method === 'POST') {
                 axios.post(options.url, {
                     ...options.qs
                 }, {
