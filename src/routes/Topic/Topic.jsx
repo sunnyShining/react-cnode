@@ -13,7 +13,6 @@ class Topic extends Component {
     }
     componentWillMount = () => {
         let id = this.props.match.params.id;
-        console.log(id);
         this.fetchTopic({id});
     }
     fetchTopic = (options) => {
@@ -93,7 +92,7 @@ class Topic extends Component {
                                 <div key={index} className={classnames('cell', 'reply_area', 'reply_item', {'reply_highlight': item.is_uped})} reply_id="5a54a935a89c475d7ea4fb54" reply_to_id="" id="5a54a935a89c475d7ea4fb54">
                                     <div className="author_content">
                                         <a href="/user/i5ting" className="user_avatar">
-                                            <img src={item.author.avatar_url} title="i5ting" />
+                                            <img src={item.author.avatar_url} alt="" title="i5ting" />
                                         </a>
                                         <div className="user_info">
                                             <a className="dark reply_author" href="/user/i5ting">{item.author.loginname}</a>
