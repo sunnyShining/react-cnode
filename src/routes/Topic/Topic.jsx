@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -52,7 +53,7 @@ class Topic extends Component {
                               发布于 {fromNow(topic.create_at)}
                             </span>
                             <span>
-                              作者 <a href={`/user/${topic.author && topic.author.loginname}`}>{topic.author && topic.author.loginname}</a>
+                              作者 <Link to={`/user/${topic.author && topic.author.loginname}`}>{topic.author && topic.author.loginname}</Link>
                             </span>
                             <span>
                               {topic.visit_count} 次浏览
@@ -89,14 +90,14 @@ class Topic extends Component {
                     {
                         topic.replies ? topic.replies.map((item, index) => {
                             return (
-                                <div key={index} className={classnames('cell', 'reply_area', 'reply_item', {'reply_highlight': item.is_uped})} reply_id="5a54a935a89c475d7ea4fb54" reply_to_id="" id="5a54a935a89c475d7ea4fb54">
+                                <div key={index} className={classnames('cell', 'reply_area', 'reply_item', {'reply_highlight': item.is_uped})} reply_id={item.id} reply_to_id="" id={item.id}>
                                     <div className="author_content">
-                                        <a href="/user/i5ting" className="user_avatar">
+                                        <Link to={`/user/${item.author && item.author.loginname}`} className="user_avatar">
                                             <img src={item.author.avatar_url} alt="" title="i5ting" />
-                                        </a>
+                                        </Link>
                                         <div className="user_info">
-                                            <a className="dark reply_author" href="/user/i5ting">{item.author.loginname}</a>
-                                            <a className="reply_time" href="#5a54a935a89c475d7ea4fb54">{index+1}楼•{fromNow(item.create_at)}</a>
+                                            <Link className="dark reply_author" to={`/user/${item.author && item.author.loginname}`}>{item.author.loginname}</Link>
+                                            <a className="reply_time" href={`#${item.id}`}>{index+1}楼•{fromNow(item.create_at)}</a>
                                             <span className="reply_by_author">作者</span>
                                         </div>
                                         <div className="user_action">

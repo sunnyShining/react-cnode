@@ -58,9 +58,9 @@ class Home extends Component {
                             topics.map((item, index) => {
                                 return (
                                     <div className="cell" key={index}>
-                                        <a className="user_avatar pull-left" href="/user/atian25">
+                                        <Link className="user_avatar pull-left" to={`/user/${item.author && item.author.loginname}`}>
                                             <img src={item.author ? item.author.avatar_url : ''} title={item.author ? item.author.loginname : ''} alt="" />
-                                        </a>
+                                        </Link>
                                         <span className="reply_count pull-left">
                                             <span className="count_of_replies" title="回复数">
                                                 { item.reply_count }
@@ -70,10 +70,10 @@ class Home extends Component {
                                                 { item.visit_count }
                                             </span>
                                         </span>
-                                        <a className="last_time pull-right" href="/topic/5a2403226190c8912ebaceeb#5a52fec3a89c475d7ea4fada">
+                                        <Link className="last_time pull-right" to={`/topic/${item.id}`}>
                                             {/* <img className="user_small_avatar" src="" alt="" /> */}
                                             <span className="last_active_time">{fromNow(item.last_reply_at)}</span>
-                                        </a>
+                                        </Link>
                                         <div className="topic_title_wrapper">
                                             {
                                                 (() => {

@@ -72,7 +72,7 @@ class User extends Component {
                             <span className="count_of_replies" title="回复数">
                                 12
                             </span>
-                            <span className="count_seperator">/</span>
+                            <span className="count_seperator"> / </span>
                             <span className="count_of_visits" title="点击数">
                                 2188
                             </span>
@@ -105,7 +105,7 @@ class User extends Component {
                             <span className="count_of_replies" title="回复数">
                                 5
                             </span>
-                            <span className="count_seperator">/</span>
+                            <span className="count_seperator"> / </span>
                             <span className="count_of_visits" title="点击数">
                                 410
                             </span>
@@ -129,7 +129,7 @@ class User extends Component {
                             <span className="count_of_replies" title="回复数">
                                 12
                             </span>
-                            <span className="count_seperator">/</span>
+                            <span className="count_seperator"> / </span>
                             <span className="count_of_visits" title="点击数">
                                 2188
                             </span>
