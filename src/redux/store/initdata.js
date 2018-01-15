@@ -10,5 +10,6 @@ export default {
 	},
 	user: {
 		userInfo: {},
+		collect: []
 	},
 };

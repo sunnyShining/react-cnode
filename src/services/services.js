@@ -101,17 +101,14 @@ export default {
     },
     // get /topic_collect/:loginname 用户所收藏的主题
     userCollect(options = {}) {
+        let url = `${urls.userCollect}${options.username}`;
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'GET',
-                url: urls.userCollect,
-                qs: options,
-            }).then((data) => {
+                url,
+                qs: {},
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
