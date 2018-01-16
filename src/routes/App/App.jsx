@@ -17,6 +17,8 @@ import NotFound from '../NoFound/NoFound.jsx';
 import Home from '../Home/Home.jsx';
 import Topic from '../Topic/Topic.jsx';
 import User from '../User/User.jsx';
+import GetStart from '../GetStart/GetStart.jsx';
+import Api from '../Api/Api.jsx';
 
 const history = createHistory()
 
@@ -36,6 +38,8 @@ class App extends Component {
                                 <Route path='/home'  component={Home}/>
                                 <Route path='/topic/:id'  component={Topic}/>
                                 <Route path='/user/:name'  component={User}/>
+                                <Route path='/getstart'  component={GetStart}/>
+                                <Route path='/api'  component={Api}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
