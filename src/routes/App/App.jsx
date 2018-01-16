@@ -19,6 +19,7 @@ import Topic from '../Topic/Topic.jsx';
 import User from '../User/User.jsx';
 import GetStart from '../GetStart/GetStart.jsx';
 import Api from '../Api/Api.jsx';
+import About from '../About/About.jsx';
 
 const history = createHistory()
 
@@ -40,6 +41,7 @@ class App extends Component {
                                 <Route path='/user/:name'  component={User}/>
                                 <Route path='/getstart'  component={GetStart}/>
                                 <Route path='/api'  component={Api}/>
+                                <Route path='/about'  component={About}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
