@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as home from '../../redux/actions/home';
 import { fromNow } from '../../utils/utils';
+import Pagination from '../../components/Pagination/Pagination.jsx';
 
 class Home extends Component {
 	constructor(props) {
 		super(props);
         this.state = {
             currentTag: 'all',
+            currentPage: 1,
+            total: 589
         };
 	}
 	componentWillMount = () => {
@@ -28,8 +31,33 @@ class Home extends Component {
 		fetchTopics(options);
 	}
     changeTag = (tag) => {
+        let total;
+        switch(tag) {
+            case 'all':
+                total = 589;
+                break;
+            case 'good':
+                total = 16;
+                break;
+            case 'share':
+                total = 36;
+                break;
+            case 'ask':
+                total = 64;
+                break;
+            case 'job':
+                total = 11;
+                break;
+            case 'dev':
+                total = 30;
+                break;
+            default:
+                break;
+        }
         this.setState({
             currentTag: tag,
+            currentPage: 1,
+            total,
         });
         let options = {
             page: 1,
@@ -39,9 +67,24 @@ class Home extends Component {
         };
         this.fetchTopics(options);
     }
+    handlePage = (page) => {
+        let { currentTag, currentPage } = this.state;
+        if (page !== currentPage){
+            let options = {
+                page,
+                tab: currentTag,
+                limit: 40,
+                mdrender: true,
+            };
+            this.fetchTopics(options);
+            this.setState({
+                currentPage: page,
+            });
+        }
+    }
     render() {
     	let { topics } = this.props;
-        let { currentTag } = this.state;
+        let { currentTag, currentPage, total } = this.state;
         return (
             <div className="panel">
                 <div className="header">
@@ -103,18 +146,7 @@ class Home extends Component {
                             })
                         }
                     </div>
-                    <div className="pagination" current_page="1">
-                        <ul>
-                            <li className="disabled"><a>«</a></li>
-                            <li className="disabled active"><a>1</a></li>
-                            <li><a href="/?tab=all&amp;page=2">2</a></li>
-                            <li><a href="/?tab=all&amp;page=3">3</a></li>
-                            <li><a href="/?tab=all&amp;page=4">4</a></li>
-                            <li><a href="/?tab=all&amp;page=5">5</a></li>
-                            <li><a>...</a></li>
-                            <li><a href="/?tab=all&amp;page=100">»</a></li>
-                        </ul>
-                    </div>
+                    <Pagination total={total} currentPage={currentPage} handlePage={this.handlePage} />
                 </div>
             </div>
         );

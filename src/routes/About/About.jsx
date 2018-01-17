@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class About extends Component {
     render() {
@@ -7,7 +8,7 @@ export default class About extends Component {
                 <div className="panel">
                     <div className="header">
                         <ul className="breadcrumb">
-                            <li><a href="/">主页</a><span className="divider">/</span></li>
+                            <li><Link to="/home">主页</Link><span className="divider">/</span></li>
                             <li className="active">关于</li>
                         </ul>
                     </div>
