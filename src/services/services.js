@@ -29,7 +29,7 @@ export default {
             utils.http.request({
                 method: 'GET',
                 url,
-                qs: {},
+                qs: {accesstoken: options.options},
             }, (data) => {
                 resolve(data);
             });
@@ -130,17 +130,14 @@ export default {
     },
     // post /reply/:reply_id/ups 为评论点赞
     ups(options = {}) {
+        let url = `${urls.ups}${options.reply_id}/ups`
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'POST',
-                url: urls.ups,
-                qs: options,
-            }).then((data) => {
+                url,
+                qs: {accesstoken: options.accesstoken},
+            } , (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },

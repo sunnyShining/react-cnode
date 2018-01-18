@@ -20,6 +20,16 @@ class Topic extends Component {
         const { fetchTopic } = this.props;
         fetchTopic(options);
     }
+    ups = (reply_id) => {
+        const { ups, accesstoken } = this.props;
+        let options = {
+            reply_id,
+            accesstoken,
+        };
+        ups(options);
+        let id = this.props.match.params.id;
+        this.fetchTopic({id});
+    }
     render() {
         let { topic } = this.props;
         return (
@@ -85,7 +95,7 @@ class Topic extends Component {
                 </div>
                 <div className="panel">
                     <div className="header">
-                        <span className="col_fade">11 回复</span>
+                        <span className="col_fade">{topic.replies && topic.replies.length} 回复</span>
                     </div>
                     {
                         topic.replies ? topic.replies.map((item, index) => {
@@ -98,11 +108,11 @@ class Topic extends Component {
                                         <div className="user_info">
                                             <Link className="dark reply_author" to={`/user/${item.author && item.author.loginname}`}>{item.author.loginname}</Link>
                                             <a className="reply_time" href={`#${item.id}`}>{index+1}楼•{fromNow(item.create_at)}</a>
-                                            <span className="reply_by_author">作者</span>
+                                            {item.author.loginname === topic.author.loginname ? <span className="reply_by_author">作者</span> : null}
                                         </div>
                                         <div className="user_action">
                                             <span>
-                                                <i className="fa up_btn fa-thumbs-o-up" title="喜欢"></i>
+                                                <i className={classnames('fa up_btn fa-thumbs-o-up', {'uped': item.is_uped})} title="喜欢" onClick={() => {this.ups(item.id)}}></i>
                                                 <span className="up-count">
                                                   &nbsp;{item.ups ? item.ups.length : 0}
                                                 </span>
@@ -135,6 +145,6 @@ Topic.propTypes = {
 }
 
 export default connect(
-    state => {return {...state.topic}},
+    state => {return {...state.topic, ...state.app}},
     dispatch => bindActionCreators(topic, dispatch)
 )(Topic)

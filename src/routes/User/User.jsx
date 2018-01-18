@@ -78,9 +78,9 @@ class User extends Component {
                             if (index < 6) {
                                 return (
                                     <div className="cell" key={index}>
-                                        <a className="user_avatar pull-left" href="/user/i5ting">
+                                        <Link className="user_avatar pull-left" to={`/user/${item.author.loginname}`}>
                                             <img src={item.author && item.author.avatar_url} alt="" title={item.author && item.author.loginname} />
-                                        </a>
+                                        </Link>
                                         <span className="reply_count pull-left">
                                             <span className="count_of_replies" title="回复数">
                                                 12
@@ -114,9 +114,9 @@ class User extends Component {
                                                     }
                                                 })()
                                             }
-                                            <a className="topic_title" to={`/topic/${item.id}`} title={item.title}>
+                                            <Link className="topic_title" to={`/topic/${item.id}`} title={item.title}>
                                                 {item.title}
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 );
@@ -139,9 +139,9 @@ class User extends Component {
                             if (index < 6) {
                                 return (
                                     <div className="cell" key={index}>
-                                        <a className="user_avatar pull-left" href="/user/i5ting">
+                                        <Link className="last_time pull-right" to={`/topic/${item.id}`}>
                                             <img src={item.author && item.author.avatar_url} alt="" title={item.author && item.author.loginname} />
-                                        </a>
+                                        </Link>
                                         <span className="reply_count pull-left">
                                             <span className="count_of_replies" title="回复数">
                                                 12
@@ -175,9 +175,9 @@ class User extends Component {
                                                     }
                                                 })()
                                             }
-                                            <a className="topic_title" to={`/topic/${item.id}`} title={item.title}>
+                                            <Link className="topic_title" to={`/topic/${item.id}`} title={item.title}>
                                                 {item.title}
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 );

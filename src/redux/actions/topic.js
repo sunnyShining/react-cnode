@@ -10,3 +10,7 @@ export let fetchTopic = (options = {}) => async (dispatch, getState) => {
         }
     });
 }
+
+export let ups = (options = {}) => async (dispatch, getState) => {
+	let data = await services.ups(options);
+}
