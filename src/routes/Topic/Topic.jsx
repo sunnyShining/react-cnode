@@ -20,13 +20,13 @@ class Topic extends Component {
         const { fetchTopic } = this.props;
         fetchTopic(options);
     }
-    ups = (reply_id) => {
+    ups = async (reply_id) => {
         const { ups, accesstoken } = this.props;
         let options = {
             reply_id,
             accesstoken,
         };
-        ups(options);
+        await ups(options);
         let id = this.props.match.params.id;
         this.fetchTopic({id});
     }

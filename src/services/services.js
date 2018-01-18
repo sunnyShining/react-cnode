@@ -8,6 +8,7 @@
 
 import utils from '../utils/http';
 import urls from './urls';
+import Toast from '../components/Toast/index';
 
 export default {
     // get /topics 主题首页
@@ -137,6 +138,11 @@ export default {
                 url,
                 qs: {accesstoken: options.accesstoken},
             } , (data) => {
+                if (data.action === 'down') {
+                    Toast.info('取消点赞');
+                } else {
+                    Toast.info('点赞成功');
+                }
                 resolve(data);
             });
         });
