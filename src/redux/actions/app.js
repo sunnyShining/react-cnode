@@ -1,10 +1,12 @@
-const RE_NAME = 'RE_NAME';
+import services from '../../services/services';
+const GET_INFO = 'GET_INFO';
 
-export default{
-	changeName(name) {
-		return ({
-			type: RE_NAME,
-			name
-		});
-	}
+export let getUserInfo = (options = {}) => async (dispatch, getState) => {
+	let data = await services.accesstoken(options) || {};
+	dispatch({
+        type: GET_INFO,
+        payload: {
+            info: data
+        }
+    });
 }

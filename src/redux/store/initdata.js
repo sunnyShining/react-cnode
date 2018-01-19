@@ -1,6 +1,12 @@
 export default {
 	app: {
-		accesstoken: 'f2d01ba3-7cc9-447c-9262-02f90ee40446'
+		accesstoken: 'f2d01ba3-7cc9-447c-9262-02f90ee40446',
+		info: {
+			success: true,
+			loginname: '',
+			avatar_url: '',
+			id: ''
+		}
 	},
 	home: {
 		topics: [],

@@ -8,13 +8,14 @@ import * as topic from '../../redux/actions/topic';
 import { fromNow } from '../../utils/utils';
 
 class Topic extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
     componentWillMount = () => {
         let id = this.props.match.params.id;
-        this.fetchTopic({id});
+        const { accesstoken } = this.props;
+        this.fetchTopic({
+            id,
+            accesstoken,
+            mdrender: true
+        });
     }
     fetchTopic = (options) => {
         const { fetchTopic } = this.props;
@@ -28,7 +29,29 @@ class Topic extends Component {
         };
         await ups(options);
         let id = this.props.match.params.id;
-        this.fetchTopic({id});
+        this.fetchTopic({
+            id,
+            accesstoken,
+            mdrender: true
+        });
+    }
+    collect = async () => {
+        const id = this.props.match.params.id;
+        const { collect, accesstoken } = this.props;
+        const options = {
+            topic_id: id,
+            accesstoken,
+        };
+        await collect(options);
+    }
+    decollect = async () => {
+        const id = this.props.match.params.id;
+        const { deCollect, accesstoken } = this.props;
+        const options = {
+            topic_id: id,
+            accesstoken,
+        };
+        await deCollect(options);
     }
     render() {
         let { topic } = this.props;
@@ -83,6 +106,9 @@ class Topic extends Component {
                                     }
                                 })()
                             }</span>
+                            {
+                                topic.is_collect ? <input className="span-common  pull-right collect_btn" type="submit" value="取消收藏" action="de_collect" onClick={() => {this.decollect()}} /> : <input className="span-common span-success pull-right collect_btn" type="submit" value="收藏" action="collect" onClick={() => {this.collect()}} />
+                            }
                         </div>
                     </div>
                     <div className="inner topic">
@@ -117,7 +143,9 @@ class Topic extends Component {
                                                   &nbsp;{item.ups ? item.ups.length : 0}
                                                 </span>
                                             </span>
-                                            <span> </span>
+                                            <span>
+                                                &nbsp;<i className="fa fa-reply reply2_btn" title="回复"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div className="reply_content from-i5ting">

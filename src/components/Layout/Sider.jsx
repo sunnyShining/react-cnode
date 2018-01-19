@@ -7,26 +7,54 @@
 */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import * as app from '../../redux/actions/app';
 
-export default class Sider extends Component {
+class Sider extends Component {
+    componentWillMount = () => {
+        const { accesstoken, getUserInfo } = this.props;
+        getUserInfo({
+            accesstoken
+        });
+    }
 	render() {
+        let { info } = this.props;
 		return (
             <div id="sidebar">
                 <div className="panel">
+                    <div className="header">
+                        <span className="col_fade">个人信息</span>
+                    </div>
                     <div className="inner">
-                        <p>CNode：Node.js专业中文社区</p>
-                        <div>
-                            您可以
-                            <a href="/signin">登录</a>
-                            或
-                            <a href="/signup">注册</a>
-                            , 也可以
-                            <a href="/auth/github">
-                                <span className="span-info">
-                                    通过 GitHub 登录
+                        <div className="user_card">
+                            <div>
+                                <Link className="user_avatar" to={`/user/${info.loginname}`}>
+                                    <img src={info.avatar_url} alt={info.loginname} title={info.loginname} />
+                                </Link>
+                                <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
+                                <div className="board clearfix">
+                                    <div className="floor">
+                                        <span className="big">积分: {info.score ? info.score : 0} </span>
+                                    </div>
+                                </div>
+                                <div className="space clearfix"></div>
+                                <span className="signature">
+                                    “
+                                        sunshine
+                                    ”
                                 </span>
-                            </a>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div className="panel">
+                    <div className="inner">
+                        <Link to="/create" id="create_topic_btn">
+                            <span className="span-success">发布话题</span>
+                        </Link>
                     </div>
                 </div>
                 <div className="panel">
@@ -133,3 +161,11 @@ export default class Sider extends Component {
 		);
 	}
 }
+Sider.propTypes = {
+    state: PropTypes.object,
+}
+
+export default connect(
+    state => {return {...state.app}},
+    dispatch => bindActionCreators(app, dispatch)
+)(Sider)

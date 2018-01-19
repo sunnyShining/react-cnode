@@ -30,7 +30,10 @@ export default {
             utils.http.request({
                 method: 'GET',
                 url,
-                qs: {accesstoken: options.options},
+                qs: {
+                    accesstoken: options.accesstoken,
+                    mdrender: options.mdrender,
+                },
             }, (data) => {
                 resolve(data);
             });
@@ -38,17 +41,23 @@ export default {
     },
     // post /topics 新建主题
     newTopics(options = {}) {
+        if (options.tab === '') {
+            Toast.info('请选择版块');
+            return;
+        } else if (options.title === '') {
+            Toast.info('标题不能为空！');
+            return;
+        } else if (options.content === '') {
+            Toast.info('内容不能为空！');
+            return;
+        }
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'POST',
                 url: urls.newTopics,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -75,12 +84,8 @@ export default {
                 method: 'POST',
                 url: urls.collect,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -91,12 +96,8 @@ export default {
                 method: 'POST',
                 url: urls.deCollect,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -167,12 +168,8 @@ export default {
                 method: 'POST',
                 url: urls.accesstoken,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },

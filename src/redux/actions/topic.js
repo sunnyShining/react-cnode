@@ -14,3 +14,11 @@ export let fetchTopic = (options = {}) => async (dispatch, getState) => {
 export let ups = (options = {}) => async (dispatch, getState) => {
 	await services.ups(options);
 }
+
+export let collect = (options = {}) => async (dispatch, getState) => {
+	await services.collect(options);
+}
+
+export let deCollect = (options = {}) => async (dispatch, getState) => {
+	await services.deCollect(options);
+}

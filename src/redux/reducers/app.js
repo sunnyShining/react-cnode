@@ -2,10 +2,10 @@ import initData from '../store/initdata';
 
 export const app = (state = initData.app, action) => {
     switch (action.type) {
-        case "RE_NAME":
+        case "GET_INFO":
             return {
                 ...state,
-                name: action.name
+                info: action.payload.info
             }
         default:
             return state
