@@ -29,7 +29,7 @@ class Header extends Component {
             confirmButtonText: '登陆',
             confirmCallBack(accesstoken) {
                 if (accesstoken === '' || !accesstoken) {
-                    Toast.info(`${accesstoken}不能为空！`);
+                    Toast.info('accesstoken不能为空！');
                 } else {
                     Dialog.close();
                     Toast.info('登录成功！');
