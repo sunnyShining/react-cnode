@@ -1,4 +1,3 @@
-
 import Loading from './src/Loading.jsx';
 
 let loadingInstance = 0;

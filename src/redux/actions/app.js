@@ -1,12 +1,33 @@
 import services from '../../services/services';
-const GET_INFO = 'GET_INFO';
+const CHANGE_ACCESS = 'CHANGE_ACCESS';
+const GET_ACCESS = 'GET_ACCESS';
+const GET_USER = 'GET_USER';
 
-export let getUserInfo = (options = {}) => async (dispatch, getState) => {
+export let changeAccesstoken = (options = {}) => (dispatch, getState) => {
+    dispatch({
+        type: CHANGE_ACCESS,
+        payload: {
+            accesstoken: options.accesstoken
+        }
+    });
+}
+
+export let getAccess = (options = {}) => async (dispatch, getState) => {
 	let data = await services.accesstoken(options) || {};
 	dispatch({
-        type: GET_INFO,
+        type: GET_ACCESS,
         payload: {
-            info: data
+            accessInfo: data
         }
+    });
+}
+
+export let getUser = (options = {}) => async (dispatch, getState) => {
+	let data = await services.user(options) || {data: {}};
+	dispatch({
+        type: GET_USER,
+        payload: {
+            userInfo: data.data,
+        },
     });
 }

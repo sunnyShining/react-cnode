@@ -12,44 +12,84 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as app from '../../redux/actions/app';
+import Dialog from '../Dialog/index';
+import Toast from '../Toast/index';
 
 class Sider extends Component {
-    componentWillMount = () => {
-        const { accesstoken, getUserInfo } = this.props;
-        getUserInfo({
-            accesstoken
+    signIn = () => {
+        Dialog.open({
+            showInput: true,
+            inputPlaceholder: '请输入accesstoken',
+            confirmButtonText: '登陆',
+            confirmCallBack(accesstoken) {
+                if (accesstoken === '' || !accesstoken) {
+                    Toast.info(`${accesstoken}不能为空！`);
+                } else {
+                    Dialog.close();
+                    Toast.info('登录成功！');
+                    window.localStorage.setItem('accesstoken', accesstoken);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
+            },
+            cancelCallBack(accesstoken) {
+                Dialog.close();
+            },
         });
     }
 	render() {
-        let { info } = this.props;
+        let { accessInfo } = this.props;
 		return (
             <div id="sidebar">
-                <div className="panel">
-                    <div className="header">
-                        <span className="col_fade">个人信息</span>
-                    </div>
-                    <div className="inner">
-                        <div className="user_card">
-                            <div>
-                                <Link className="user_avatar" to={`/user/${info.loginname}`}>
-                                    <img src={info.avatar_url} alt={info.loginname} title={info.loginname} />
-                                </Link>
-                                <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
-                                <div className="board clearfix">
-                                    <div className="floor">
-                                        <span className="big">积分: {info.score ? info.score : 0} </span>
+                {
+                    (() => {
+                        if (accessInfo.success) {
+                            return (
+                                <div className="panel">
+                                    <div className="header">
+                                        <span className="col_fade">个人信息</span>
+                                    </div>
+                                    <div className="inner">
+                                        <div className="user_card">
+                                            <div>
+                                                <Link className="user_avatar" to={`/user/${accessInfo.loginname}`}>
+                                                    <img src={accessInfo.avatar_url} alt={accessInfo.loginname} title={accessInfo.loginname} />
+                                                </Link>
+                                                <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
+                                                <div className="board clearfix">
+                                                    <div className="floor">
+                                                        <span className="big">积分: {accessInfo.score ? accessInfo.score : 0} </span>
+                                                    </div>
+                                                </div>
+                                                <div className="space clearfix"></div>
+                                                <span className="signature">
+                                                    “
+                                                        sunshine
+                                                    ”
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="space clearfix"></div>
-                                <span className="signature">
-                                    “
-                                        sunshine
-                                    ”
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            );
+                        } else {
+                            return (
+                                <div className="panel">
+                                    <div className="inner">
+                                        <p>CNode：Node.js专业中文社区</p>
+                                        <div>
+                                            您可以
+                                            <a>
+                                                <span className="span-info" onClick={() => {this.signIn()}}>输入accesstoken登录</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        }
+                    })()
+                }
                 <div className="panel">
                     <div className="inner">
                         <Link to="/create" id="create_topic_btn">

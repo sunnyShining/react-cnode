@@ -1,11 +1,20 @@
 export default {
 	app: {
-		accesstoken: 'f2d01ba3-7cc9-447c-9262-02f90ee40446',
-		info: {
-			success: true,
+		accesstoken: '',
+		accessInfo: {
+			success: false,
 			loginname: '',
 			avatar_url: '',
 			id: ''
+		},
+		userInfo: {
+			avatar_url: '',
+		    create_at: '',
+		    githubUsername: '',
+		    loginname: '',
+		    recent_replies: [],
+		    recent_topics: [],
+		    score: 0
 		}
 	},
 	home: {
@@ -56,4 +65,5 @@ export default {
 		},
 		collect: []
 	},
+	messages: {},
 };

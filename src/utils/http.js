@@ -22,12 +22,18 @@ axios.interceptors.response.use(function (response) {
     if (response.status >= 200 && response.status < 300) {
         return Promise.resolve(response);
     } else {
-        const error = new Error(response.statusText);
-        error.response = response;
+        let error = {
+            success: false,
+            error_msg: '系统错误，请稍后重试！'
+        }
         return Promise.reject(error);
     }
 }, function (error) {
     Loading.close();
+    error = {
+        success: false,
+        error_msg: '系统错误，请稍后重试！'
+    }
     // Do something with response error
     return Promise.reject(error);
 });
