@@ -30,7 +30,7 @@ class Sider extends Component {
                     window.localStorage.setItem('accesstoken', accesstoken);
                     setTimeout(() => {
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 }
             },
             cancelCallBack(accesstoken) {

@@ -36,7 +36,7 @@ class Header extends Component {
                     window.localStorage.setItem('accesstoken', accesstoken);
                     setTimeout(() => {
                         window.location.reload();
-                    }, 2000);
+                    }, 1000);
                 }
             },
             cancelCallBack(accesstoken) {
@@ -49,7 +49,7 @@ class Header extends Component {
         Toast.info('登出成功');
         setTimeout(() => {
             window.location.reload();
-        }, 2000);
+        }, 1000);
     }
 	render() {
         let { accessInfo } = this.props;
