@@ -22,12 +22,13 @@ export default class Header extends Component {
                             <input type="text" id="q" name="q" className="search-query span3" value="" />
                         </form>
                         <ul className="nav pull-right">
-                            <li><Link to="/">首页</Link></li>
+                            <li><Link to="/home">首页</Link></li>
+                            <li><Link to="/home">未读消息</Link></li>
                             <li><Link to="/getstart">新手入门</Link></li>
                             <li><Link to="/api">API</Link></li>
-                            <li><Link to="/about" target="">关于</Link></li>
-                            <li><Link to="/signup">注册</Link></li>
-                            <li><Link to="/signin">登录</Link></li>
+                            <li><Link to="/about">关于</Link></li>
+                            <li><Link to="/signup">设置</Link></li>
+                            <li><Link to="/signin">退出</Link></li>
                         </ul>
                         <a className="btn btn-navbar" id="responsive-sidebar-trigger">
                             <span className="icon-bar"></span>
