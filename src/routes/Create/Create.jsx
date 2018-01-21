@@ -10,7 +10,6 @@ import Toast from '../../components/Toast/index';
 class Create extends Component {
     constructor(props) {
         super(props);
-        console.log(333, props);
         this.state = {
             content: ''
         };

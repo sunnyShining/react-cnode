@@ -24,7 +24,7 @@ class Messages extends Component {
     render() {
         return (
             <div className="panel">
-             Messages
+             功能待开发
             </div>
         );
     }

@@ -15,7 +15,10 @@ export default class Dialog extends Component {
         let { cancelCallBack } = this.props;
         cancelCallBack && cancelCallBack();
     }
-    oneBtn = () => {}
+    oneBtn = () => {
+        let { oneBtnCallBack } = this.props;
+        oneBtnCallBack && oneBtnCallBack();
+    }
 	render() {
         let { title, showInput, message, showTitle, useText, text, showOneBtn, oneBtnText, cancelButtonText, confirmButtonText, inputPlaceholder } = this.props;
 		return (
@@ -56,7 +59,7 @@ export default class Dialog extends Component {
                                             if(showOneBtn) {
                                                 return (
                                                     <div className="dialog-btn">
-                                                        <input type="button" className="dialog-one-btn f-cf37937" value={oneBtnText} onClick={() => this.oneBtn()} />
+                                                        <input type="button" style={{width: '100%'}} className="dialog-one-btn f-cf37937" value={oneBtnText} onClick={() => this.oneBtn()} />
                                                     </div>
                                                 );
                                             } else {

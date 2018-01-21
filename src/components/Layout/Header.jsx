@@ -75,6 +75,17 @@ class Header extends Component {
             },
         });
     }
+    setting = () => {
+        Dialog.open({
+            showInput: false,
+            message: '请移步cnode官网修改个人信息！',
+            showOneBtn: true,
+            oneBtnText: '我知道了',
+            oneBtnCallBack() {
+                Dialog.close();
+            },
+        });
+    }
 	render() {
         let { accessInfo } = this.props;
 		return (
@@ -84,9 +95,9 @@ class Header extends Component {
                         <Link className="brand" to="/">
                             <img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="logo" />
                         </Link>
-                        <form id="search_form" className="navbar-search" action="/search">
+                        {/*<form id="search_form" className="navbar-search" action="/search">
                             <input type="text" id="q" name="q" className="search-query span3" value="" />
-                        </form>
+                        </form>*/}
                             {
                                 (() => {
                                     if (accessInfo.success) {
@@ -98,7 +109,7 @@ class Header extends Component {
                                                 <li><Link to="/getstart">新手入门</Link></li>
                                                 <li><Link to="/api">API</Link></li>
                                                 <li><Link to="/about">关于</Link></li>
-                                                <li><Link to="/setting">设置</Link></li>
+                                                <li onClick={() => this.setting()}><a>设置</a></li>
                                                 <li onClick={() => this.logout()}><a>退出</a></li>
                                             </ul>
                                         );
