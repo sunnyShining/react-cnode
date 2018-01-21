@@ -67,4 +67,7 @@ export default {
 		collect: []
 	},
 	messages: {},
+	create: {
+		status: {}
+	}
 };

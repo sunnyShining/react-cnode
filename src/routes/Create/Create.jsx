@@ -5,12 +5,14 @@ import { bindActionCreators } from 'redux';
 import LzEditor from 'react-lz-editor';
 import * as create from '../../redux/actions/create';
 import * as app from '../../redux/actions/app';
+import Toast from '../../components/Toast/index';
 
 class Create extends Component {
     constructor(props) {
         super(props);
+        console.log(333, props);
         this.state = {
-            markdownContent: ''
+            content: ''
         };
     }
     componentWillMount = () => {
@@ -29,12 +31,12 @@ class Create extends Component {
     }
     receiveMarkdown = (content) => {
         this.setState({
-            markdownContent: content
+            content: content
         });
     }
     create = async () => {
         const { accesstoken, createTopics } = this.props;
-        const { markdownContent } = this.state;
+        const { content } = this.state;
         let titleD = this.refs.title;
         let title = titleD.value;
         let tab = this.refs.tab && this.refs.tab.value;
@@ -42,11 +44,17 @@ class Create extends Component {
             title,
             accesstoken,
             tab, // 写死dev避免污染日常板块
-            content: markdownContent
+            content
         };
-        console.log(tab)
+        if (tab === '') {
+            Toast.info('请选择版块！')
+        }
         await createTopics(options);
-        window.location.reload();
+        const { status, history } = this.props;
+        if (status.success) {
+            history.push('home');
+            Toast.info('发布成功！');
+        }
     }
     render() {
         return (
@@ -70,7 +78,9 @@ class Create extends Component {
                                     <option value="dev">客户端测试</option>
                                 </select>
                                 <span id="topic_create_warn"></span>
-                                <textarea autoFocus="" className="span9" ref="title" name="title" rows="1" placeholder="标题字数 10 字以上"></textarea>
+                                <p>
+                                    <input type="text" style={{width: '85%'}} autoFocus="" ref="title" name="title" placeholder="标题字数 10 字以上" />
+                                </p>
                                 <div className="markdown_editor in_editor">
                                     <div className="markdown_in_editor">
                                         <LzEditor
@@ -99,6 +109,6 @@ Create.propTypes = {
     state: PropTypes.object,
 }
 export default connect(
-    state => {return {...state.app}},
+    state => {return {...state.create, ...state.app}},
     dispatch => bindActionCreators({...create, ...app}, dispatch)
 )(Create)

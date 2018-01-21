@@ -3,6 +3,7 @@ import { home } from './home';
 import { topic } from './topic';
 import { user } from './user';
 import { messages } from './messages';
+import { create } from './create';
 
 const rootReducer = {
   	app, //全局
@@ -10,6 +11,7 @@ const rootReducer = {
   	topic,
   	user,
   	messages,
+  	create,
 }
 
 export default rootReducer
