@@ -7,11 +7,56 @@ import classnames from 'classnames';
 import * as topic from '../../redux/actions/topic';
 import * as app from '../../redux/actions/app';
 import { fromNow } from '../../utils/utils';
+import Dialog from '../../components/Dialog/index';
+import Toast from '../../components/Toast/index';
+import LzEditor from 'react-lz-editor';
 
 class Topic extends Component {
     constructor(props){
         super(props);
         console.log(321, props);
+        this.state = {
+            content: '',
+            content2: '',
+            markdownContent: '',
+            markdownContent2: '',
+            replyId: '',
+        };
+    }
+    signIn = () => {
+        let self = this;
+        Dialog.open({
+            showInput: true,
+            inputPlaceholder: '请输入accesstoken',
+            confirmButtonText: '登陆',
+            confirmCallBack: async function (accesstoken) {
+                if (accesstoken === '' || !accesstoken) {
+                    Toast.info('accesstoken不能为空！');
+                } else {
+                    const { getAccess } = self.props;
+                    await getAccess({
+                        accesstoken
+                    });
+                    const { accessInfo, changeAccesstoken, getInfo } = self.props;
+                    if (accessInfo.success) {
+                        changeAccesstoken({
+                            accesstoken
+                        });
+                        getInfo({
+                            username: accessInfo.loginname
+                        });
+                        Dialog.close();
+                        Toast.info('登录成功！');
+                        window.localStorage.setItem('accesstoken', accesstoken);
+                    } else {
+                        Toast.info('accesstoken不正确，请重新输入！');
+                    }
+                }
+            },
+            cancelCallBack(accesstoken) {
+                Dialog.close();
+            },
+        });
     }
     componentWillMount = () => {
         let id = this.props.match.params.id;
@@ -40,17 +85,58 @@ class Topic extends Component {
         this.changeSider();
     }
     ups = async (reply_id) => {
-        const { ups, accesstoken } = this.props;
-        let options = {
-            reply_id,
-            accesstoken,
-        };
-        await ups(options);
-        let id = this.props.match.params.id;
+        const { ups, accesstoken, accessInfo } = this.props;
+        if (accessInfo.success) {
+            let options = {
+                reply_id,
+                accesstoken,
+            };
+            await ups(options);
+            let id = this.props.match.params.id;
+            this.fetchTopic({
+                id,
+                accesstoken,
+                mdrender: true
+            });
+        } else {
+            this.signIn();
+        }
+    }
+    reply = (reply_id, loginname) => {
+        this.setState({
+            replyId: reply_id,
+            markdownContent: `@${loginname}`
+        });
+    }
+    reply2 = async (reply_id) => {
+        const { content, content2 } = this.state;
+        const { accesstoken, replies } = this.props;
+        let topicId = this.props.match.params.id;
+        let options;
+        if (reply_id !== '') {
+            options = {
+                reply_id,
+                accesstoken,
+                content,
+                topicId,
+            };
+        } else {
+            options = {
+                accesstoken,
+                content: content2,
+                topicId,
+            };
+        }
+        await replies(options);
         this.fetchTopic({
-            id,
+            id: topicId,
             accesstoken,
             mdrender: true
+        });
+        this.setState({
+            markdownContent: '',
+            markdownContent2: '',
+            replyId: ''
         });
     }
     collect = async () => {
@@ -71,8 +157,19 @@ class Topic extends Component {
         };
         await deCollect(options);
     }
+    receiveMarkdown = (content) => {
+        this.setState({
+            content: content
+        });
+    }
+    receiveMarkdown2 = (content) => {
+        this.setState({
+            content2: content
+        });
+    }
     render() {
-        let { topic } = this.props;
+        let { topic, accessInfo } = this.props;
+        let { replyId, markdownContent, markdownContent2 } = this.state;
         return (
             <div>
                 <div className="panel">
@@ -161,9 +258,12 @@ class Topic extends Component {
                                                   &nbsp;{item.ups ? item.ups.length : 0}
                                                 </span>
                                             </span>
-                                            <span>
-                                                &nbsp;<i className="fa fa-reply reply2_btn" title="回复"></i>
-                                            </span>
+                                            {
+                                                accessInfo.success ?
+                                                <span>
+                                                    &nbsp;<i className="fa fa-reply reply2_btn" title="回复" onClick={() => {this.reply(item.id, item.author.loginname)}}></i>
+                                                </span>: null
+                                            }
                                         </div>
                                     </div>
                                     <div className="reply_content from-i5ting">
@@ -173,11 +273,54 @@ class Topic extends Component {
                                     </div>
                                     <div className="clearfix">
                                         <div className="reply2_area">
+                                            {
+                                                replyId === item.id ?
+                                                <div className="markdown_editor in_editor">
+                                                    <div className="markdown_in_editor">
+                                                        <LzEditor
+                                                          active={true}
+                                                          importContent={markdownContent}
+                                                          cbReceiver={this.receiveMarkdown}
+                                                          image={false}
+                                                          video={false}
+                                                          audio={false}
+                                                          convertFormat="markdown"/>
+                                                        <div className="editor_buttons">
+                                                            <input type="button" className="span-primary submit_btn" value="回复" onClick={() => {this.reply2(item.id)}} />
+                                                        </div>
+                                                    </div>
+                                                </div> : null
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             );
                         }) : null
+                    }
+                    {
+                        accessInfo.success ?
+                        <div className="panel">
+                            <div className="header">
+                                <span className="col_fade">添加回复</span>
+                            </div>
+                            <div className="inner reply">
+                                <div className="markdown_editor in_editor">
+                                    <div className="markdown_in_editor">
+                                        <LzEditor
+                                          active={true}
+                                          importContent={markdownContent2}
+                                          cbReceiver={this.receiveMarkdown2}
+                                          image={false}
+                                          video={false}
+                                          audio={false}
+                                          convertFormat="markdown"/>
+                                        <div className="editor_buttons">
+                                            <input type="button" className="span-primary submit_btn" value="回复" onClick={() => {this.reply2('')}} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> : null
                     }
                 </div>
             </div>

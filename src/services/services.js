@@ -116,17 +116,21 @@ export default {
     },
     // post /topic/:topic_id/replies 新建评论
     replies(options = {}) {
+        let url = `${urls.replies}${options.topicId}/replies`;
+        let qs = {
+            content: options.content,
+            accesstoken: options.accesstoken
+        };
+        if (options.reply_id) {
+            qs.reply_id = options.reply_id
+        }
         return new Promise((resolve, reject) => {
             utils.http.request({
                 method: 'POST',
-                url: urls.replies,
-                qs: options,
-            }).then((data) => {
+                url,
+                qs,
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -156,6 +160,7 @@ export default {
                 method: 'GET',
                 url,
                 qs: {},
+                mask: true,
             }, (data) => {
                 resolve(data);
             });
@@ -168,6 +173,7 @@ export default {
                 method: 'POST',
                 url: urls.accesstoken,
                 qs: options,
+                mask: true,
             }, (data) => {
                 resolve(data);
             });

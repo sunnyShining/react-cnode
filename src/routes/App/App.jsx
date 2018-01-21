@@ -20,7 +20,6 @@ import Api from '../Api/Api.jsx';
 import About from '../About/About.jsx';
 import Create from '../Create/Create.jsx';
 import Messages from '../Messages/Messages.jsx';
-import Toast from '../../components/Toast/index';
 
 const history = createHistory()
 
@@ -42,8 +41,6 @@ class App extends Component {
             getInfo({
                 username: accessInfo.loginname
             });
-        } else {
-            Toast.info('accesstoken不正确，请重新登录！');
         }
     }
     render() {

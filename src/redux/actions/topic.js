@@ -22,3 +22,7 @@ export let collect = (options = {}) => async (dispatch, getState) => {
 export let deCollect = (options = {}) => async (dispatch, getState) => {
 	await services.deCollect(options);
 }
+
+export let replies = (options = {}) => async (dispatch, getState) => {
+	await services.replies(options);
+}

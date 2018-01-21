@@ -42,7 +42,7 @@ class Create extends Component {
         let options = {
             title,
             accesstoken,
-            tab, // 写死dev避免污染日常板块
+            tab,
             content
         };
         if (tab === '') {

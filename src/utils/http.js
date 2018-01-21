@@ -54,7 +54,7 @@ export default {
                 }).then((res) => {
                     cb(res.data)
                 }).catch((err) => {
-                    if (!err.success) {
+                    if (!err.success && !options.mask) {
                         Toast.info(err.error_msg);
                     }
                     cb(err);
@@ -67,7 +67,7 @@ export default {
                 }).then((res) => {
                     cb(res.data);
                 }).catch((err) => {
-                    if (!err.success) {
+                    if (!err.success && !options.mask) {
                         Toast.info(err.error_msg);
                     }
                     cb(err);
