@@ -14,7 +14,6 @@ import LzEditor from 'react-lz-editor';
 class Topic extends Component {
     constructor(props){
         super(props);
-        console.log(321, props);
         this.state = {
             content: '',
             content2: '',
