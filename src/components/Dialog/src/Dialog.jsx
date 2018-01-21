@@ -4,15 +4,11 @@ import ReactDOM from 'react-dom';
 import './Dialog.less';
 
 export default class Dialog extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
     changeBtnColor = () => {}
     confirm = () => {
         let { confirmCallBack } = this.props;
-        let dataD = this.refs.data;
-        let data = dataD.value;
+        let dataDom = this.refs.data;
+        let data = dataDom ? dataDom.value : '';
         confirmCallBack && confirmCallBack(data);
     }
     cancel = () => {

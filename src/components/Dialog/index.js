@@ -6,7 +6,6 @@ let defaults = {
     title: '温馨提示', // 弹框头部
     showTitle: true, // 显示头
     message: '', // body的文字
-    dialogType: 0,
     showInput: false, // 是否显示输入框
     inputPlaceholder: '', // 输入框未输入文字显示
     inputValue: null, // 输入框默认内容

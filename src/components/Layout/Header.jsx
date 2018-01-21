@@ -23,20 +23,33 @@ class Header extends Component {
         });
     }
     signIn = () => {
+        let self = this;
         Dialog.open({
             showInput: true,
             inputPlaceholder: '请输入accesstoken',
             confirmButtonText: '登陆',
-            confirmCallBack(accesstoken) {
+            confirmCallBack: async function (accesstoken) {
                 if (accesstoken === '' || !accesstoken) {
                     Toast.info('accesstoken不能为空！');
                 } else {
-                    Dialog.close();
-                    Toast.info('登录成功！');
-                    window.localStorage.setItem('accesstoken', accesstoken);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
+                    const { getAccess } = self.props;
+                    await getAccess({
+                        accesstoken
+                    });
+                    const { accessInfo, changeAccesstoken, getUser } = self.props;
+                    if (accessInfo.success) {
+                        changeAccesstoken({
+                            accesstoken
+                        });
+                        getUser({
+                            username: accessInfo.loginname
+                        });
+                        Dialog.close();
+                        Toast.info('登录成功！');
+                        window.localStorage.setItem('accesstoken', accesstoken);
+                    } else {
+                        Toast.info('accesstoken不正确，请重新输入！');
+                    }
                 }
             },
             cancelCallBack(accesstoken) {
@@ -45,11 +58,33 @@ class Header extends Component {
         });
     }
     logout = () => {
-        window.localStorage.removeItem('accesstoken');
-        Toast.info('登出成功');
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
+        let self = this;
+                // window.localStorage.removeItem('accesstoken');
+        // Toast.info('登出成功');
+        // setTimeout(() => {
+        //     window.location.reload();
+        // }, 1000);
+        Dialog.open({
+            showInput: false,
+            message: '确定要登出吗？',
+            confirmButtonText: '确定',
+            confirmCallBack: async function (data) {
+                    window.localStorage.removeItem('accesstoken');
+                    const { getAccess } = self.props;
+                    await getAccess({
+                        accesstoken: '',
+                    });
+                    const { changeAccesstoken } = self.props;
+                    changeAccesstoken({
+                        accesstoken: '',
+                    });
+                    Dialog.close();
+                    Toast.info('登出成功！');
+            },
+            cancelCallBack(accesstoken) {
+                Dialog.close();
+            },
+        });
     }
 	render() {
         let { accessInfo } = this.props;

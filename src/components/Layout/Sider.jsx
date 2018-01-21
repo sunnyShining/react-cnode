@@ -17,20 +17,33 @@ import Toast from '../Toast/index';
 
 class Sider extends Component {
     signIn = () => {
+        let self = this;
         Dialog.open({
             showInput: true,
             inputPlaceholder: '请输入accesstoken',
             confirmButtonText: '登陆',
-            confirmCallBack(accesstoken) {
+            confirmCallBack: async function (accesstoken) {
                 if (accesstoken === '' || !accesstoken) {
                     Toast.info('accesstoken不能为空！');
                 } else {
-                    Dialog.close();
-                    Toast.info('登录成功！');
-                    window.localStorage.setItem('accesstoken', accesstoken);
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 1000);
+                    const { getAccess } = self.props;
+                    await getAccess({
+                        accesstoken
+                    });
+                    const { accessInfo, changeAccesstoken, getUser } = self.props;
+                    if (accessInfo.success) {
+                        changeAccesstoken({
+                            accesstoken
+                        });
+                        getUser({
+                            username: accessInfo.loginname
+                        });
+                        Dialog.close();
+                        Toast.info('登录成功！');
+                        window.localStorage.setItem('accesstoken', accesstoken);
+                    } else {
+                        Toast.info('accesstoken不正确，请重新输入！');
+                    }
                 }
             },
             cancelCallBack(accesstoken) {
@@ -46,29 +59,38 @@ class Sider extends Component {
                     (() => {
                         if (accessInfo.success) {
                             return (
-                                <div className="panel">
-                                    <div className="header">
-                                        <span className="col_fade">个人信息</span>
-                                    </div>
-                                    <div className="inner">
-                                        <div className="user_card">
-                                            <div>
-                                                <Link className="user_avatar" to={`/user/${accessInfo.loginname}`}>
-                                                    <img src={accessInfo.avatar_url} alt={accessInfo.loginname} title={accessInfo.loginname} />
-                                                </Link>
-                                                <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
-                                                <div className="board clearfix">
-                                                    <div className="floor">
-                                                        <span className="big">积分: {accessInfo.score ? accessInfo.score : 0} </span>
+                                <div>
+                                    <div className="panel">
+                                        <div className="header">
+                                            <span className="col_fade">个人信息</span>
+                                        </div>
+                                        <div className="inner">
+                                            <div className="user_card">
+                                                <div>
+                                                    <Link className="user_avatar" to={`/user/${accessInfo.loginname}`}>
+                                                        <img src={accessInfo.avatar_url} alt={accessInfo.loginname} title={accessInfo.loginname} />
+                                                    </Link>
+                                                    <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
+                                                    <div className="board clearfix">
+                                                        <div className="floor">
+                                                            <span className="big">积分: {accessInfo.score ? accessInfo.score : 0} </span>
+                                                        </div>
                                                     </div>
+                                                    <div className="space clearfix"></div>
+                                                    <span className="signature">
+                                                        “
+                                                            sunshine
+                                                        ”
+                                                    </span>
                                                 </div>
-                                                <div className="space clearfix"></div>
-                                                <span className="signature">
-                                                    “
-                                                        sunshine
-                                                    ”
-                                                </span>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div className="panel">
+                                        <div className="inner">
+                                            <Link to="/create" id="create_topic_btn">
+                                                <span className="span-success">发布话题</span>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +101,7 @@ class Sider extends Component {
                                     <div className="inner">
                                         <p>CNode：Node.js专业中文社区</p>
                                         <div>
-                                            您可以
+                                            您可以&nbsp;
                                             <a>
                                                 <span className="span-info" onClick={() => {this.signIn()}}>输入accesstoken登录</span>
                                             </a>
@@ -90,13 +112,6 @@ class Sider extends Component {
                         }
                     })()
                 }
-                <div className="panel">
-                    <div className="inner">
-                        <Link to="/create" id="create_topic_btn">
-                            <span className="span-success">发布话题</span>
-                        </Link>
-                    </div>
-                </div>
                 <div className="panel">
                     <div className="inner ads">
                         <a href="https://alinode.aliyun.com/?ref=cnode" target="_blank" rel="noopener noreferrer" className="banner sponsor_outlink" data-label="alinode">
@@ -112,7 +127,7 @@ class Sider extends Component {
                         </a>
                     </div>
                 </div>
-                <div className="panel">
+                {/*<div className="panel">
                     <div className="header">
                         <span className="col_fade">无人回复的话题</span>
                     </div>
@@ -154,7 +169,7 @@ class Sider extends Component {
                             </li>
                         </ol>
                     </div>
-                </div>
+                </div>*/}
                 <div className="panel">
                     <div className="header">
                         <span className="col_fade">友情社区</span>
