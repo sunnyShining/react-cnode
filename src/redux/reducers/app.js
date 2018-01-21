@@ -12,10 +12,15 @@ export const app = (state = initData.app, action) => {
                 ...state,
                 accessInfo: action.payload.accessInfo
             };
-        case "GET_USER":
+        case "GET_INFO":
             return {
                 ...state,
-                userInfo: action.payload.userInfo
+                info: action.payload.info
+            };
+        case "AUTHORORINFO":
+            return {
+                ...state,
+                isAuthor: action.payload.isAuthor
             };
         default:
             return state;

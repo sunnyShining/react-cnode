@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LzEditor from 'react-lz-editor';
 import * as create from '../../redux/actions/create';
+import * as app from '../../redux/actions/app';
 
 class Create extends Component {
     constructor(props) {
@@ -11,6 +12,20 @@ class Create extends Component {
         this.state = {
             markdownContent: ''
         };
+    }
+    componentWillMount = () => {
+        this.changeSider();
+    }
+    changeSider = () => {
+        const { getInfo, authorOrInfo, accessInfo } = this.props;
+        authorOrInfo({
+            isAuthor: false,
+        });
+        if (accessInfo && accessInfo.loginname !== '') {
+            getInfo({
+                username: accessInfo.loginname
+            });
+        }
     }
     receiveMarkdown = (content) => {
         this.setState({
@@ -85,5 +100,5 @@ Create.propTypes = {
 }
 export default connect(
     state => {return {...state.app}},
-    dispatch => bindActionCreators(create, dispatch)
+    dispatch => bindActionCreators({...create, ...app}, dispatch)
 )(Create)

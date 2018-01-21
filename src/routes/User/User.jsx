@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // import classnames from 'classnames';
 import * as user from '../../redux/actions/user';
+import * as app from '../../redux/actions/app';
 import { fromNow } from '../../utils/utils';
 
 class User extends Component {
@@ -12,6 +13,7 @@ class User extends Component {
         let name = this.props.match.params.name;
         this.getUser({username: name});
         this.userCollect({username: name});
+        this.changeSider();
     }
     getUser = (options) => {
         const { getUser } = this.props;
@@ -20,6 +22,18 @@ class User extends Component {
     userCollect = (options) => {
         const { userCollect } = this.props;
         userCollect(options);
+    }
+    changeSider = () => {
+        const name = this.props.match.params.name;
+        const { getInfo, authorOrInfo } = this.props;
+        authorOrInfo({
+            isAuthor: false,
+        });
+        if (name !== '') {
+            getInfo({
+                username: name
+            });
+        }
     }
     render() {
         let { userInfo } = this.props;
@@ -201,6 +215,6 @@ User.propTypes = {
 }
 
 export default connect(
-    state => {return {...state.user}},
-    dispatch => bindActionCreators(user, dispatch)
+    state => {return {...state.user, ...state.app}},
+    dispatch => bindActionCreators({...user, ...app}, dispatch)
 )(User)

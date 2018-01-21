@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as home from '../../redux/actions/home';
+import * as app from '../../redux/actions/app';
 import { fromNow } from '../../utils/utils';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 
@@ -26,9 +27,21 @@ class Home extends Component {
 		};
 		this.fetchTopics(options);
 	}
-	fetchTopics = (options) => {
+    changeSider = () => {
+        const { getInfo, authorOrInfo, accessInfo } = this.props;
+        authorOrInfo({
+            isAuthor: false,
+        });
+        if (accessInfo && accessInfo.loginname !== '') {
+            getInfo({
+                username: accessInfo.loginname
+            });
+        }
+    }
+	fetchTopics = async (options) => {
 		const { fetchTopics } = this.props;
-		fetchTopics(options);
+		await fetchTopics(options);
+        this.changeSider();
 	}
     changeTag = (tag) => {
         let total;
@@ -158,6 +171,6 @@ Home.propTypes = {
 }
 
 export default connect(
-    state => {return {...state.home}},
-    dispatch => bindActionCreators(home, dispatch)
+    state => {return {...state.home, ...state.app}},
+    dispatch => bindActionCreators({...home, ...app}, dispatch)
 )(Home)

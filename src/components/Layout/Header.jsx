@@ -16,12 +16,6 @@ import Dialog from '../Dialog/index';
 import Toast from '../Toast/index';
 
 class Header extends Component {
-    componentWillMount = () => {
-        const { accesstoken, getAccess } = this.props;
-        getAccess({
-            accesstoken
-        });
-    }
     signIn = () => {
         let self = this;
         Dialog.open({
@@ -36,12 +30,12 @@ class Header extends Component {
                     await getAccess({
                         accesstoken
                     });
-                    const { accessInfo, changeAccesstoken, getUser } = self.props;
+                    const { accessInfo, changeAccesstoken, getInfo } = self.props;
                     if (accessInfo.success) {
                         changeAccesstoken({
                             accesstoken
                         });
-                        getUser({
+                        getInfo({
                             username: accessInfo.loginname
                         });
                         Dialog.close();
@@ -59,11 +53,6 @@ class Header extends Component {
     }
     logout = () => {
         let self = this;
-                // window.localStorage.removeItem('accesstoken');
-        // Toast.info('登出成功');
-        // setTimeout(() => {
-        //     window.location.reload();
-        // }, 1000);
         Dialog.open({
             showInput: false,
             message: '确定要登出吗？',

@@ -7,7 +7,7 @@ export default {
 			avatar_url: '',
 			id: ''
 		},
-		userInfo: {
+		info: {
 			avatar_url: '',
 		    create_at: '',
 		    githubUsername: '',
@@ -15,7 +15,8 @@ export default {
 		    recent_replies: [],
 		    recent_topics: [],
 		    score: 0
-		}
+		},
+		isAuthor: false,
 	},
 	home: {
 		topics: [],

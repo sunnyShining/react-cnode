@@ -30,12 +30,12 @@ class Sider extends Component {
                     await getAccess({
                         accesstoken
                     });
-                    const { accessInfo, changeAccesstoken, getUser } = self.props;
+                    const { accessInfo, changeAccesstoken, getInfo } = self.props;
                     if (accessInfo.success) {
                         changeAccesstoken({
                             accesstoken
                         });
-                        getUser({
+                        getInfo({
                             username: accessInfo.loginname
                         });
                         Dialog.close();
@@ -52,12 +52,12 @@ class Sider extends Component {
         });
     }
 	render() {
-        let { accessInfo } = this.props;
+        let { accessInfo, info, isAuthor } = this.props;
 		return (
             <div id="sidebar">
                 {
                     (() => {
-                        if (accessInfo.success) {
+                        if (accessInfo.success && !isAuthor) {
                             return (
                                 <div>
                                     <div className="panel">
@@ -67,13 +67,13 @@ class Sider extends Component {
                                         <div className="inner">
                                             <div className="user_card">
                                                 <div>
-                                                    <Link className="user_avatar" to={`/user/${accessInfo.loginname}`}>
-                                                        <img src={accessInfo.avatar_url} alt={accessInfo.loginname} title={accessInfo.loginname} />
+                                                    <Link className="user_avatar" to={`/user/${info.loginname}`}>
+                                                        <img src={info.avatar_url} alt={info.loginname} title={info.loginname} />
                                                     </Link>
-                                                    <span className="user_name"><a className="dark" href="/user/sunnyShining">sunnyShining</a></span>
+                                                    <span className="user_name"><Link className="dark" to={`/user/${info.loginname}`}>{info.loginname}</Link></span>
                                                     <div className="board clearfix">
                                                         <div className="floor">
-                                                            <span className="big">积分: {accessInfo.score ? accessInfo.score : 0} </span>
+                                                            <span className="big">积分: {info.score ? info.score : 0} </span>
                                                         </div>
                                                     </div>
                                                     <div className="space clearfix"></div>
@@ -94,6 +94,35 @@ class Sider extends Component {
                                         </div>
                                     </div>
                                 </div>
+                            );
+                        } else if (isAuthor) {
+                            return (
+                                <div className="panel">
+                                        <div className="header">
+                                            <span className="col_fade">作者</span>
+                                        </div>
+                                        <div className="inner">
+                                            <div className="user_card">
+                                                <div>
+                                                    <Link className="user_avatar" to={`/user/${info.loginname}`}>
+                                                        <img src={info.avatar_url} alt={info.loginname} title={info.loginname} />
+                                                    </Link>
+                                                    <span className="user_name"><Link className="dark" to={`/user/${info.loginname}`}>{info.loginname}</Link></span>
+                                                    <div className="board clearfix">
+                                                        <div className="floor">
+                                                            <span className="big">积分: {info.score ? info.score : 0} </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="space clearfix"></div>
+                                                    <span className="signature">
+                                                        “
+                                                            sunshine
+                                                        ”
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             );
                         } else {
                             return (

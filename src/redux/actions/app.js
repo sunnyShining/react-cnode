@@ -1,7 +1,8 @@
 import services from '../../services/services';
 const CHANGE_ACCESS = 'CHANGE_ACCESS';
 const GET_ACCESS = 'GET_ACCESS';
-const GET_USER = 'GET_USER';
+const GET_INFO = 'GET_INFO';
+const AUTHORORINFO = 'AUTHORORINFO';
 
 export let changeAccesstoken = (options = {}) => (dispatch, getState) => {
     dispatch({
@@ -22,12 +23,20 @@ export let getAccess = (options = {}) => async (dispatch, getState) => {
     });
 }
 
-export let getUser = (options = {}) => async (dispatch, getState) => {
+export let getInfo = (options = {}) => async (dispatch, getState) => {
 	let data = await services.user(options) || {data: {}};
 	dispatch({
-        type: GET_USER,
+        type: GET_INFO,
         payload: {
-            userInfo: data.data,
+            info: data.data,
+        },
+    });
+}
+export let authorOrInfo = (options = {}) => (dispatch, getState) => {
+    dispatch({
+        type: AUTHORORINFO,
+        payload: {
+            isAuthor: options.isAuthor,
         },
     });
 }

@@ -20,16 +20,31 @@ import Api from '../Api/Api.jsx';
 import About from '../About/About.jsx';
 import Create from '../Create/Create.jsx';
 import Messages from '../Messages/Messages.jsx';
+import Toast from '../../components/Toast/index';
 
 const history = createHistory()
 
 class App extends Component {
     componentWillMount = () => {
+        this.tryLogin();
+    }
+    tryLogin = async () => {
         let accesstoken = window.localStorage.getItem('accesstoken');
-        const { changeAccesstoken } = this.props;
-        changeAccesstoken({
+        const { getAccess } = this.props;
+        await getAccess({
             accesstoken
         });
+        const { accessInfo, changeAccesstoken, getInfo } = this.props;
+        if (accessInfo.success) {
+            changeAccesstoken({
+                accesstoken
+            });
+            getInfo({
+                username: accessInfo.loginname
+            });
+        } else {
+            Toast.info('accesstoken不正确，请重新登录！');
+        }
     }
     render() {
         return (
