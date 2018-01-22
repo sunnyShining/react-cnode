@@ -14,7 +14,6 @@ class Create extends Component {
             content: '',
             markdownContent: ''
         };
-        console.log(333, props);
     }
     componentWillMount = async () => {
         let id = this.props.match.params.id;
