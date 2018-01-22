@@ -22,6 +22,11 @@ export const app = (state = initData.app, action) => {
                 ...state,
                 isAuthor: action.payload.isAuthor
             };
+        case "GET_MESSAGE_COUNT":
+            return {
+                ...state,
+                count: action.payload.count
+            };
         default:
             return state;
     }

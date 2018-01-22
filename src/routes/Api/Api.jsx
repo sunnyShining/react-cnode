@@ -1,25 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as app from '../../redux/actions/app';
 
-class Api extends Component {
-    componentWillMount = () => {
-        this.changeSider();
-    }
-    changeSider = () => {
-        const { getInfo, authorOrInfo, accessInfo } = this.props;
-        authorOrInfo({
-            isAuthor: false,
-        });
-        if (accessInfo && accessInfo.loginname !== '') {
-            getInfo({
-                username: accessInfo.loginname
-            });
-        }
-    }
+export default class Api extends Component {
     render() {
         return (
             <div>
@@ -452,12 +434,3 @@ class Api extends Component {
         );
     }
 }
-
-Api.propTypes = {
-    state: PropTypes.object,
-}
-
-export default connect(
-    state => {return {...state.app}},
-    dispatch => bindActionCreators({...app}, dispatch)
-)(Api)

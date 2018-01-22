@@ -17,6 +17,9 @@ export default {
 		    score: 0
 		},
 		isAuthor: false,
+		count: {
+			data: 0
+		},
 	},
 	home: {
 		topics: [],
@@ -66,8 +69,43 @@ export default {
 		},
 		collect: []
 	},
-	messages: {},
+	messages: {
+		hasRead: [],
+		hasnotRead: []
+	},
 	create: {
-		status: {}
+		status: {},
+		updateStatus: {},
+		topic: {
+			author: {
+				avatar_url: '',
+				loginname: ''
+    		},
+		    author_id: '',
+		    content: '',
+		    create_at: '',
+		    good: false,
+		    id: '',
+		    is_collect: false,
+		    last_reply_at: '',
+		    replies: [{
+		        author: {
+		        	avatar_url: '',
+		          	loginname: ''
+		        },
+		        content: '',
+		        create_at: '',
+		        id: '',
+		        is_uped: false,
+		        reply_id: null,
+		        ups: [
+		        ]
+		    }],
+		    reply_count: 0,
+		    tab: '',
+		    title: '',
+		    top: false,
+		    visit_count: 0
+		},
 	}
 };

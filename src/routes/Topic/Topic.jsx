@@ -66,22 +66,27 @@ class Topic extends Component {
             mdrender: true
         });
     }
-    changeSider = () => {
-        const { getInfo, authorOrInfo, topic } = this.props;
+    componentWillUnmount = () => {
+        const { accessInfo } = this.props;
+        this.changeSider(false, accessInfo.loginname);
+    }
+    changeSider = (isAuthor, name) => {
+        const { authorOrInfo, getInfo } = this.props;
         authorOrInfo({
-            isAuthor: true,
+            isAuthor,
         });
-        if (topic && topic.author && topic.author.loginname !== '') {
+        if (name !== '') {
             getInfo({
-                username: topic.author.loginname
+                username: name
             });
         }
     }
     fetchTopic = async (options) => {
         const { fetchTopic } = this.props;
         await fetchTopic(options);
+        const { topic } = this.props;
         // 侧边栏
-        this.changeSider();
+        this.changeSider(true, topic.author.loginname);
     }
     ups = async (reply_id) => {
         const { ups, accesstoken, accessInfo } = this.props;
@@ -168,6 +173,7 @@ class Topic extends Component {
     }
     render() {
         let { topic, accessInfo } = this.props;
+        let id = this.props.match.params.id;
         let { replyId, markdownContent, markdownContent2 } = this.state;
         return (
             <div>
@@ -224,6 +230,14 @@ class Topic extends Component {
                                 topic.is_collect ? <input className="span-common  pull-right collect_btn" type="submit" value="取消收藏" action="de_collect" onClick={() => {this.decollect()}} /> : <input className="span-common span-success pull-right collect_btn" type="submit" value="收藏" action="collect" onClick={() => {this.collect()}} />
                             }
                         </div>
+                        {
+                            topic.author && (topic.author.loginname === accessInfo.loginname) ?
+                            <div id="manage_topic">
+                                <Link to={`/create/${id}`}>
+                                    <i className="fa fa-lg fa-pencil-square-o" title="编辑"></i>
+                                </Link>
+                            </div> : null
+                        }
                     </div>
                     <div className="inner topic">
                         <div className="topic_content">

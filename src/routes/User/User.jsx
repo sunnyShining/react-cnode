@@ -13,7 +13,7 @@ class User extends Component {
         let name = this.props.match.params.name;
         this.getUser({username: name});
         this.userCollect({username: name});
-        this.changeSider();
+        this.changeSider(false, name);
     }
     getUser = (options) => {
         const { getUser } = this.props;
@@ -23,8 +23,7 @@ class User extends Component {
         const { userCollect } = this.props;
         userCollect(options);
     }
-    changeSider = () => {
-        const name = this.props.match.params.name;
+    changeSider = (isAuthor, name) => {
         const { getInfo, authorOrInfo } = this.props;
         authorOrInfo({
             isAuthor: false,
@@ -34,6 +33,10 @@ class User extends Component {
                 username: name
             });
         }
+    }
+    componentWillUnmount = () => {
+        const { accessInfo } = this.props;
+        this.changeSider(false, accessInfo.loginname);
     }
     render() {
         let { userInfo } = this.props;

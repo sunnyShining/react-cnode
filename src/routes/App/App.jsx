@@ -38,10 +38,17 @@ class App extends Component {
             changeAccesstoken({
                 accesstoken
             });
+            this.getMessageCount();
             getInfo({
                 username: accessInfo.loginname
             });
         }
+    }
+    getMessageCount = () => {
+        const { getMessageCount, accesstoken } = this.props;
+        getMessageCount({
+            accesstoken,
+        });
     }
     render() {
         return (
@@ -59,7 +66,7 @@ class App extends Component {
                                 <Route path='/getstart'  component={GetStart}/>
                                 <Route path='/api'  component={Api}/>
                                 <Route path='/about'  component={About}/>
-                                <Route path='/create' component={Create}/>
+                                <Route path='/create/:id' component={Create}/>
                                 <Route path='/messages' component={Messages}/>
                                 <Route component={NotFound}/>
                             </Switch>

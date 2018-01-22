@@ -87,7 +87,7 @@ class Header extends Component {
         });
     }
 	render() {
-        let { accessInfo } = this.props;
+        let { accessInfo, count } = this.props;
 		return (
             <div className="navbar">
                 <div className="navbar-inner">
@@ -104,8 +104,8 @@ class Header extends Component {
                                         return (
                                             <ul className="nav pull-right">
                                                 <li><Link to="/home">首页</Link></li>
-                                                <li><Link to="/messages">未读消息</Link></li>
-                                                <li><Link to="/create">发布话题</Link></li>
+                                                <li><Link to="/messages">{count.data ? <span className="big messages_count">{count.data}</span> : null}未读消息</Link></li>
+                                                <li><Link to="/create/new">发布话题</Link></li>
                                                 <li><Link to="/getstart">新手入门</Link></li>
                                                 <li><Link to="/api">API</Link></li>
                                                 <li><Link to="/about">关于</Link></li>

@@ -68,12 +68,8 @@ export default {
                 method: 'POST',
                 url: urls.update,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -186,12 +182,8 @@ export default {
                 method: 'GET',
                 url: urls.count,
                 qs: options,
-            }).then((data) => {
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -202,12 +194,9 @@ export default {
                 method: 'GET',
                 url: urls.messages,
                 qs: options,
-            }).then((data) => {
+                mask: true,
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },
@@ -218,12 +207,9 @@ export default {
                 method: 'POST',
                 url: urls.markAll,
                 qs: options,
-            }).then((data) => {
+                mask: true,
+            }, (data) => {
                 resolve(data);
-            }).catch((error) => {
-                reject(error);
-                // 交予全局处理
-                // message.error(error.msg);
             });
         });
     },

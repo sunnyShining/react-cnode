@@ -11,21 +11,28 @@ class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: ''
+            content: '',
+            markdownContent: ''
         };
+        console.log(333, props);
     }
-    componentWillMount = () => {
-        this.changeSider();
-    }
-    changeSider = () => {
-        const { getInfo, authorOrInfo, accessInfo } = this.props;
-        authorOrInfo({
-            isAuthor: false,
-        });
-        if (accessInfo && accessInfo.loginname !== '') {
-            getInfo({
-                username: accessInfo.loginname
+    componentWillMount = async () => {
+        let id = this.props.match.params.id;
+        if (id !== 'new') {
+            const { fetchTopic, accesstoken } = this.props;
+            await fetchTopic({
+                id,
+                accesstoken,
+                mdrender: false
             });
+            const { topic } = this.props;
+            if (topic) {
+                this.refs.tab && (this.refs.tab.value = topic.tab);
+                this.refs.title && (this.refs.title.value = topic.title);
+                this.setState({
+                    markdownContent: topic.content
+                });
+            }
         }
     }
     receiveMarkdown = (content) => {
@@ -34,7 +41,7 @@ class Create extends Component {
         });
     }
     create = async () => {
-        const { accesstoken, createTopics } = this.props;
+        const { accesstoken, createTopics, updateTopics } = this.props;
         const { content } = this.state;
         let titleD = this.refs.title;
         let title = titleD.value;
@@ -48,14 +55,26 @@ class Create extends Component {
         if (tab === '') {
             Toast.info('请选择版块！')
         }
-        await createTopics(options);
-        const { status, history } = this.props;
-        if (status.success) {
-            history.push('home');
-            Toast.info('发布成功！');
+        let id = this.props.match.params.id;
+        if (id === 'new') {
+            await createTopics(options);
+            const { status, history } = this.props;
+            if (status.success) {
+                history.push('/home');
+                Toast.info('发布成功！');
+            }
+        } else {
+            options.topic_id = this.props.match.params.id;
+            await updateTopics(options);
+            const { updateStatus, history } = this.props;
+            if (updateStatus.success) {
+                history.push('/home');
+                Toast.info('更新成功！');
+            }
         }
     }
     render() {
+        let { markdownContent } = this.props;
         return (
             <div>
                 <div className="panel">
@@ -84,7 +103,7 @@ class Create extends Component {
                                     <div className="markdown_in_editor">
                                         <LzEditor
                                           active={true}
-                                          importContent=""
+                                          importContent={markdownContent}
                                           cbReceiver={this.receiveMarkdown}
                                           image={false}
                                           video={false}
@@ -106,6 +125,7 @@ class Create extends Component {
 
 Create.propTypes = {
     state: PropTypes.object,
+    match: PropTypes.object,
 }
 export default connect(
     state => {return {...state.create, ...state.app}},
