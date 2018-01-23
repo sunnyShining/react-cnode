@@ -33,12 +33,16 @@ class App extends Component {
         await getAccess({
             accesstoken
         });
-        const { accessInfo, changeAccesstoken, getInfo } = this.props;
+        const { accessInfo, changeAccesstoken, getInfo, getMessage } = this.props;
         if (accessInfo.success) {
             changeAccesstoken({
                 accesstoken
             });
-            this.getMessageCount();
+            await this.getMessageCount();
+            await getMessage({
+                accesstoken,
+                mdrender: true
+            });
             getInfo({
                 username: accessInfo.loginname
             });

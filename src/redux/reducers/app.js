@@ -27,6 +27,12 @@ export const app = (state = initData.app, action) => {
                 ...state,
                 count: action.payload.count
             };
+        case "GET_MESSAGE":
+            return {
+                ...state,
+                hasRead: action.payload.hasRead,
+                hasnotRead: action.payload.hasnotRead
+            }
         default:
             return state;
     }

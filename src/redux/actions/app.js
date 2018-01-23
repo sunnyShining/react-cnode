@@ -4,6 +4,7 @@ const GET_ACCESS = 'GET_ACCESS';
 const GET_INFO = 'GET_INFO';
 const AUTHORORINFO = 'AUTHORORINFO';
 const GET_MESSAGE_COUNT = 'GET_MESSAGE_COUNT';
+const GET_MESSAGE = 'GET_MESSAGE';
 
 export let changeAccesstoken = (options = {}) => (dispatch, getState) => {
     dispatch({
@@ -51,4 +52,19 @@ export let getMessageCount = (options = {}) => async (dispatch, getState) => {
             count: data,
         },
     });
+}
+
+export let getMessage = (options = {}) => async (dispatch, getState) => {
+    let data = await services.messages(options) || {data: {has_read_messages: [], hasnot_read_messages: []}};
+    dispatch({
+        type: GET_MESSAGE,
+        payload: {
+            hasRead: (data.data && data.data.has_read_messages) ? data.data.has_read_messages : [],
+            hasnotRead: (data.data && data.data.hasnot_read_messages) ? data.data.hasnot_read_messages : []
+        },
+    });
+}
+
+export let markAll = (options = {}) => async (dispatch, getState) => {
+    await services.markAll(options);
 }

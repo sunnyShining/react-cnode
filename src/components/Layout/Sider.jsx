@@ -57,7 +57,7 @@ class Sider extends Component {
             <div id="sidebar">
                 {
                     (() => {
-                        if (accessInfo.success && !isAuthor) {
+                        if (info && accessInfo.success && !isAuthor) {
                             return (
                                 <div>
                                     <div className="panel">
@@ -95,7 +95,7 @@ class Sider extends Component {
                                     </div>
                                 </div>
                             );
-                        } else if (isAuthor) {
+                        } else if (info && isAuthor) {
                             return (
                                 <div className="panel">
                                         <div className="header">

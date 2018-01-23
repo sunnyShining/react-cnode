@@ -20,6 +20,8 @@ export default {
 		count: {
 			data: 0
 		},
+		hasRead: [],
+		hasnotRead: []
 	},
 	home: {
 		topics: [],
@@ -68,10 +70,6 @@ export default {
 		    score: 0
 		},
 		collect: []
-	},
-	messages: {
-		hasRead: [],
-		hasnotRead: []
 	},
 	create: {
 		status: {},

@@ -3,26 +3,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-// import classnames from 'classnames';
-import * as messages from '../../redux/actions/messages';
 import * as app from '../../redux/actions/app';
 
 class Messages extends Component {
-    componentWillMount = async () => {
-        let { getMessage, accesstoken, markAll } = this.props;
-        await getMessage({
-            accesstoken,
-            mdrender: true
-        });
-        markAll({
-            accesstoken
-        });
-    }
     componentWillUnmount = () => {
-        const { getMessageCount, accesstoken } = this.props;
+        const { getMessageCount, accesstoken, markAll } = this.props;
         getMessageCount({
             accesstoken,
         });
+        markAll({
+            accesstoken,
+        })
     }
     render() {
         const { hasRead, hasnotRead } = this.props;
@@ -85,6 +76,6 @@ Messages.propTypes = {
 }
 
 export default connect(
-    state => {return {...state.messages, ...state.app}},
-    dispatch => bindActionCreators({...messages, ...app}, dispatch)
+    state => {return {...state.app}},
+    dispatch => bindActionCreators({...app}, dispatch)
 )(Messages)
