@@ -16,21 +16,21 @@ export let changeAccesstoken = (options = {}) => (dispatch, getState) => {
 }
 
 export let getAccess = (options = {}) => async (dispatch, getState) => {
-	let data = await services.accesstoken(options) || {};
+	let data = await services.accesstoken(options);
 	dispatch({
         type: GET_ACCESS,
         payload: {
-            accessInfo: data
+            accessInfo: data || {}
         }
     });
 }
 
 export let getInfo = (options = {}) => async (dispatch, getState) => {
-	let data = await services.user(options) || {data: {}};
+    let data = await services.user(options);
 	dispatch({
         type: GET_INFO,
         payload: {
-            info: data.data,
+            info: data.data || {},
         },
     });
 }
@@ -45,17 +45,17 @@ export let authorOrInfo = (options = {}) => (dispatch, getState) => {
 }
 
 export let getMessageCount = (options = {}) => async (dispatch, getState) => {
-    let data = await services.count(options) || {};
+    let data = await services.count(options);
     dispatch({
         type: GET_MESSAGE_COUNT,
         payload: {
-            count: data,
+            count: data || {},
         },
     });
 }
 
 export let getMessage = (options = {}) => async (dispatch, getState) => {
-    let data = await services.messages(options) || {data: {has_read_messages: [], hasnot_read_messages: []}};
+    let data = await services.messages(options);
     dispatch({
         type: GET_MESSAGE,
         payload: {

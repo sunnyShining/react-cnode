@@ -2,11 +2,11 @@ import services from '../../services/services';
 const GET_TOPIC = 'GET_TOPIC';
 
 export let fetchTopic = (options = {}) => async (dispatch, getState) => {
-	let data = await services.topic(options) || {data: {}};
+	let data = await services.topic(options);
 	dispatch({
         type: GET_TOPIC,
         payload: {
-            topic: data.data
+            topic: data.data || {}
         }
     });
 }

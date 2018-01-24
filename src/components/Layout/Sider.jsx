@@ -30,12 +30,16 @@ class Sider extends Component {
                     await getAccess({
                         accesstoken
                     });
-                    const { accessInfo, changeAccesstoken, getInfo } = self.props;
+                    const { accessInfo, changeAccesstoken, getInfo, getMessage } = self.props;
                     if (accessInfo.success) {
                         changeAccesstoken({
                             accesstoken
                         });
-                        getInfo({
+                        await getMessage({
+                            accesstoken,
+                            mdrender: true
+                        });
+                        await getInfo({
                             username: accessInfo.loginname
                         });
                         Dialog.close();

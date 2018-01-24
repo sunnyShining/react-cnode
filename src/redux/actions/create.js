@@ -4,31 +4,31 @@ const GET_TOPIC = 'GET_TOPIC';
 const UPDATE_TOPIC = 'UPDATE_TOPIC';
 
 export let createTopics = (options = {}) => async (dispatch, getState) => {
-	let data = await services.newTopics(options) || {};
+	let data = await services.newTopics(options);
 	dispatch({
         type: CREATE_TOPICS,
         payload: {
-            status: data
+            status: data || {}
         }
     });
 }
 
 export let fetchTopic = (options = {}) => async (dispatch, getState) => {
-	let data = await services.topic(options) || {data: {}};
+	let data = await services.topic(options);
 	dispatch({
         type: GET_TOPIC,
         payload: {
-            topic: data.data
+            topic: data.data || {}
         }
     });
 }
 
 export let updateTopics = (options = {}) => async (dispatch, getState) => {
-    let data = await services.update(options) || {};
+    let data = await services.update(options);
     dispatch({
         type: UPDATE_TOPIC,
         payload: {
-            updateStatus: data
+            updateStatus: data|| {}
         }
     });
 }

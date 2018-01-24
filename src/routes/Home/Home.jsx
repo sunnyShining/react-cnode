@@ -32,7 +32,7 @@ class Home extends Component {
         authorOrInfo({
             isAuthor: false,
         });
-        if (accessInfo && accessInfo.loginname !== '') {
+        if (accessInfo && accessInfo.loginname !== '' && accessInfo.loginname) {
             getInfo({
                 username: accessInfo.loginname
             });
