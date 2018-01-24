@@ -24,6 +24,10 @@ import Messages from '../Messages/Messages.jsx';
 const history = createHistory()
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log(123, history);
+    }
     componentWillMount = () => {
         this.tryLogin();
     }
@@ -38,13 +42,15 @@ class App extends Component {
             changeAccesstoken({
                 accesstoken
             });
+            if (history.location.pathname.indexOf('/user/') === -1) {
+                getInfo({
+                    username: accessInfo.loginname
+                });
+            }
             await this.getMessageCount();
             await getMessage({
                 accesstoken,
                 mdrender: true
-            });
-            getInfo({
-                username: accessInfo.loginname
             });
         }
     }

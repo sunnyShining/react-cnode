@@ -41,6 +41,7 @@ class User extends Component {
     render() {
         let { userInfo } = this.props;
         let { collect } = this.props;
+        let name = this.props.match.params.name;
         return (
             <div>
                 <div className="panel">
@@ -98,7 +99,7 @@ class User extends Component {
                                         <Link className="user_avatar pull-left" to={`/user/${item.author.loginname}`}>
                                             <img src={item.author && item.author.avatar_url} alt="" title={item.author && item.author.loginname} />
                                         </Link>
-                                        <span className="reply_count pull-left">
+                                        {/*<span className="reply_count pull-left">
                                             <span className="count_of_replies" title="回复数">
                                                 12
                                             </span>
@@ -106,7 +107,7 @@ class User extends Component {
                                             <span className="count_of_visits" title="点击数">
                                                 2188
                                             </span>
-                                        </span>
+                                        </span>*/}
                                         <Link className="last_time pull-right" to={`/topic/${item.id}`}>
                                             {/*<img className="user_small_avatar" src="https://avatars3.githubusercontent.com/u/21081809?v=4&amp;s=120" alt="" />*/}
                                             <span className="last_active_time">{fromNow(item.last_reply_at)}</span>
@@ -132,7 +133,7 @@ class User extends Component {
                                                 })()
                                             }
                                             <Link className="topic_title" to={`/topic/${item.id}`} title={item.title}>
-                                                {item.title}
+                                                &nbsp;{item.title}
                                             </Link>
                                         </div>
                                     </div>
@@ -143,7 +144,7 @@ class User extends Component {
                         })
                     }
                     <div className="cell more">
-                        <a className="dark" href="/user/i5ting/topics">查看更多»</a>
+                        <Link className="dark" to={`/user/${name}/topics`}>查看更多»</Link>
                     </div>
                 </div>
 
@@ -156,10 +157,10 @@ class User extends Component {
                             if (index < 6) {
                                 return (
                                     <div className="cell" key={index}>
-                                        <Link className="last_time pull-right" to={`/topic/${item.id}`}>
+                                        <Link className="user_avatar pull-left" to={`/topic/${item.id}`}>
                                             <img src={item.author && item.author.avatar_url} alt="" title={item.author && item.author.loginname} />
                                         </Link>
-                                        <span className="reply_count pull-left">
+                                        {/*<span className="reply_count pull-left">
                                             <span className="count_of_replies" title="回复数">
                                                 12
                                             </span>
@@ -167,7 +168,7 @@ class User extends Component {
                                             <span className="count_of_visits" title="点击数">
                                                 2188
                                             </span>
-                                        </span>
+                                        </span>*/}
                                         <Link className="last_time pull-right" to={`/topic/${item.id}`}>
                                             {/*<img className="user_small_avatar" src="https://avatars3.githubusercontent.com/u/21081809?v=4&amp;s=120" alt="" />*/}
                                             <span className="last_active_time">{fromNow(item.last_reply_at)}</span>
@@ -193,7 +194,7 @@ class User extends Component {
                                                 })()
                                             }
                                             <Link className="topic_title" to={`/topic/${item.id}`} title={item.title}>
-                                                {item.title}
+                                                &nbsp;{item.title}
                                             </Link>
                                         </div>
                                     </div>
@@ -204,7 +205,7 @@ class User extends Component {
                         })
                     }
                     <div className="cell more">
-                        <a className="dark" href="/user/i5ting/replies">查看更多»</a>
+                        <Link className="dark" to={`/user/${name}/replies`}>查看更多»</Link>
                     </div>
                 </div>
             </div>
