@@ -117,7 +117,6 @@ class Header extends Component {
                                         return (
                                             <ul className="nav pull-right">
                                                 <li><Link to="/home">首页</Link></li>
-                                                <li><Link to="/messages">未读消息</Link></li>
                                                 <li><Link to="/getstart">新手入门</Link></li>
                                                 <li><Link to="/api">API</Link></li>
                                                 <li><Link to="/about">关于</Link></li>

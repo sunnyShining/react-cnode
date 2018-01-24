@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './assets/libs/flexible';
 import './assets/css/reset.css';
 import './assets/css/bootstrap.min.css';
 import './assets/css/style.less';

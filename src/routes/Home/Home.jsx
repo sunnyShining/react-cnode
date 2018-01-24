@@ -111,7 +111,7 @@ class Home extends Component {
                 <div className="inner no-padding">
                     <div id="topic_list">
                         {
-                            topics.map((item, index) => {
+                            topics && topics.map((item, index) => {
                                 return (
                                     <div className="cell" key={index}>
                                         <Link className="user_avatar pull-left" to={`/user/${item.author && item.author.loginname}`}>
@@ -159,7 +159,7 @@ class Home extends Component {
                             })
                         }
                     </div>
-                    <Pagination total={total} currentPage={currentPage} handlePage={this.handlePage} />
+                    {topics && topics.length !== 0 ? <Pagination total={total} currentPage={currentPage} handlePage={this.handlePage} /> : null}
                 </div>
             </div>
         );
