@@ -44,6 +44,7 @@ class Sider extends Component {
                         });
                         Dialog.close();
                         Toast.info('登录成功！');
+                        window.location.reload();
                         window.localStorage.setItem('accesstoken', accesstoken);
                     } else {
                         Toast.info('accesstoken不正确，请重新输入！');
@@ -56,17 +57,17 @@ class Sider extends Component {
         });
     }
 	render() {
-        let { accessInfo, info, isAuthor } = this.props;
+        let { showInfo, info, isAuthor } = this.props;
 		return (
             <div id="sidebar">
                 {
                     (() => {
-                        if (info && accessInfo.success && !isAuthor) {
+                        if (info && showInfo) {
                             return (
                                 <div>
                                     <div className="panel">
                                         <div className="header">
-                                            <span className="col_fade">个人信息</span>
+                                            <span className="col_fade">{isAuthor? '作者' : '个人信息'}</span>
                                         </div>
                                         <div className="inner">
                                             <div className="user_card">
@@ -98,35 +99,6 @@ class Sider extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            );
-                        } else if (info && isAuthor) {
-                            return (
-                                <div className="panel">
-                                        <div className="header">
-                                            <span className="col_fade">作者</span>
-                                        </div>
-                                        <div className="inner">
-                                            <div className="user_card">
-                                                <div>
-                                                    <Link className="user_avatar" to={`/user/${info.loginname}`}>
-                                                        <img src={info.avatar_url} alt={info.loginname} title={info.loginname} />
-                                                    </Link>
-                                                    <span className="user_name"><Link className="dark" to={`/user/${info.loginname}`}>{info.loginname}</Link></span>
-                                                    <div className="board clearfix">
-                                                        <div className="floor">
-                                                            <span className="big">积分: {info.score ? info.score : 0} </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className="space clearfix"></div>
-                                                    <span className="signature">
-                                                        “
-                                                            sunshine
-                                                        ”
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                             );
                         } else {
                             return (

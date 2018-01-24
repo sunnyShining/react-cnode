@@ -29,7 +29,12 @@ class Home extends Component {
 	}
     changeSider = () => {
         const { getInfo, authorOrInfo, accessInfo } = this.props;
+        let showInfo = false;
+        if (accessInfo.success) {
+            showInfo = true;
+        }
         authorOrInfo({
+            showInfo,
             isAuthor: false,
         });
         if (accessInfo && accessInfo.loginname !== '' && accessInfo.loginname) {

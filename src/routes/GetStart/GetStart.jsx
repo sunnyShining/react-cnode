@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as app from '../../redux/actions/app';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-export default class Getstart extends Component {
+class Getstart extends Component {
+    componentWillMount = () => {
+        this.changeSider();
+    }
+    changeSider = () => {
+        const { getInfo, authorOrInfo, accessInfo } = this.props;
+        let showInfo = false;
+        if (accessInfo.success) {
+            showInfo = true;
+        }
+        authorOrInfo({
+            showInfo,
+            isAuthor: false,
+        });
+        if (accessInfo && accessInfo.loginname !== '' && accessInfo.loginname) {
+            getInfo({
+                username: accessInfo.loginname
+            });
+        }
+    }
     render() {
         return (
             <div>
@@ -50,3 +73,13 @@ export default class Getstart extends Component {
         );
     }
 }
+
+Getstart.propTypes = {
+    state: PropTypes.object,
+    match: PropTypes.object,
+}
+
+export default connect(
+    state => {return {...state.app}},
+    dispatch => bindActionCreators({...app}, dispatch)
+)(Getstart)

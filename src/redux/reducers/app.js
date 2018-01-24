@@ -20,7 +20,8 @@ export const app = (state = initData.app, action) => {
         case 'AUTHORORINFO':
             return {
                 ...state,
-                isAuthor: action.payload.isAuthor
+                isAuthor: action.payload.isAuthor,
+                showInfo: action.payload.showInfo
             };
         case 'GET_MESSAGE_COUNT':
             return {

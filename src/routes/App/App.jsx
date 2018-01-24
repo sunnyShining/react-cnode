@@ -39,11 +39,6 @@ class App extends Component {
             changeAccesstoken({
                 accesstoken
             });
-            if (history.location.pathname.indexOf('/user') === -1) {
-                getInfo({
-                    username: accessInfo.loginname
-                });
-            }
             await this.getMessageCount();
             await getMessage({
                 accesstoken,

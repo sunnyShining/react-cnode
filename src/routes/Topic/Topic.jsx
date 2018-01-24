@@ -70,14 +70,11 @@ class Topic extends Component {
             mdrender: true
         });
     }
-    componentWillUnmount = () => {
-        const { accessInfo } = this.props;
-        this.changeSider(false, accessInfo.loginname);
-    }
-    changeSider = (isAuthor, name) => {
+    changeSider = (showInfo, isAuthor, name) => {
         const { authorOrInfo, getInfo } = this.props;
         authorOrInfo({
             isAuthor,
+            showInfo,
         });
         if (name !== '') {
             getInfo({
@@ -90,7 +87,7 @@ class Topic extends Component {
         await fetchTopic(options);
         const { topic } = this.props;
         // 侧边栏
-        this.changeSider(true, topic.author.loginname);
+        this.changeSider(true, true, topic.author.loginname);
     }
     ups = async (reply_id) => {
         const { ups, accesstoken, accessInfo } = this.props;

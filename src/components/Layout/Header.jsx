@@ -42,6 +42,7 @@ class Header extends Component {
                         await getInfo({
                             username: accessInfo.loginname
                         });
+                        window.location.reload();
                         Dialog.close();
                         Toast.info('登录成功！');
                         window.localStorage.setItem('accesstoken', accesstoken);
@@ -62,17 +63,18 @@ class Header extends Component {
             message: '确定要登出吗？',
             confirmButtonText: '确定',
             confirmCallBack: async function (data) {
-                    window.localStorage.removeItem('accesstoken');
-                    const { getAccess } = self.props;
-                    await getAccess({
-                        accesstoken: '',
-                    });
-                    const { changeAccesstoken } = self.props;
-                    changeAccesstoken({
-                        accesstoken: '',
-                    });
-                    Dialog.close();
-                    Toast.info('登出成功！');
+                window.localStorage.removeItem('accesstoken');
+                const { getAccess } = self.props;
+                await getAccess({
+                    accesstoken: '',
+                });
+                const { changeAccesstoken } = self.props;
+                changeAccesstoken({
+                    accesstoken: '',
+                });
+                Dialog.close();
+                Toast.info('登出成功！');
+                window.location.reload();
             },
             cancelCallBack(accesstoken) {
                 Dialog.close();

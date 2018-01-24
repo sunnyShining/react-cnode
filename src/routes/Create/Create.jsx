@@ -17,6 +17,7 @@ class Create extends Component {
     }
     componentWillMount = async () => {
         let id = this.props.match.params.id;
+        this.changeSider();
         if (id !== 'new') {
             const { fetchTopic, accesstoken } = this.props;
             await fetchTopic({
@@ -32,6 +33,22 @@ class Create extends Component {
                     markdownContent: topic.content
                 });
             }
+        }
+    }
+    changeSider = () => {
+        const { getInfo, authorOrInfo, accessInfo } = this.props;
+        let showInfo = false;
+        if (accessInfo.success) {
+            showInfo = true;
+        }
+        authorOrInfo({
+            showInfo,
+            isAuthor: false,
+        });
+        if (accessInfo && accessInfo.loginname !== '' && accessInfo.loginname) {
+            getInfo({
+                username: accessInfo.loginname
+            });
         }
     }
     receiveMarkdown = (content) => {

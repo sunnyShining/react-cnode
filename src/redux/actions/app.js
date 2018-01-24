@@ -40,6 +40,7 @@ export let authorOrInfo = (options = {}) => (dispatch, getState) => {
         type: AUTHORORINFO,
         payload: {
             isAuthor: options.isAuthor,
+            showInfo: options.showInfo
         },
     });
 }

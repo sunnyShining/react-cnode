@@ -11,7 +11,7 @@ import { fromNow } from '../../utils/utils';
 class User extends Component {
     componentWillMount = async () => {
         let name = this.props.match.params.name;
-        await this.changeSider(false, name);
+        await this.changeSider(true, false, name);
         this.getUser({username: name});
         this.userCollect({username: name});
     }
@@ -23,12 +23,13 @@ class User extends Component {
         const { userCollect } = this.props;
         userCollect(options);
     }
-    changeSider = (isAuthor, name) => {
+    changeSider = (showInfo, isAuthor, name) => {
         const { getInfo, authorOrInfo } = this.props;
         authorOrInfo({
-            isAuthor: false,
+            isAuthor,
+            showInfo,
         });
-        if (name !== '') {
+        if (name) {
             getInfo({
                 username: name
             });
@@ -36,7 +37,7 @@ class User extends Component {
     }
     componentWillUnmount = () => {
         const { accessInfo } = this.props;
-        this.changeSider(false, accessInfo.loginname);
+        this.changeSider(true, false, accessInfo.loginname);
     }
     render() {
         let { userInfo } = this.props;
@@ -59,9 +60,12 @@ class User extends Component {
                             <ul className="unstyled">
                                 <span className="big">{userInfo.score}</span> 积分
                                 <li>
-                                    <Link className="dark" to={`/userTopic/${userInfo.loginname}/collections`}>
-                                        <span className="big collect-topic-count">{collect.length}</span>个话题收藏
-                                    </Link>
+                                    {
+                                        collect.length === 0 ? null :
+                                        <Link className="dark" to={`/userTopic/${userInfo.loginname}/collections`}>
+                                            <span className="big collect-topic-count">{collect.length}</span>个话题收藏
+                                        </Link>
+                                    }
                                 </li>
                                 {/*<li>
                                     <i className="fa fa-lg fa-fw fa-home"></i>
@@ -143,9 +147,12 @@ class User extends Component {
                             }
                         })
                     }
-                    <div className="cell more">
-                        <Link className="dark" to={`/userTopic/${name}/topics`}>查看更多»</Link>
-                    </div>
+                    {
+                        userInfo.recent_topics && userInfo.recent_topics.length === 0 ? null :
+                        <div className="cell more">
+                            <Link className="dark" to={`/userTopic/${name}/topics`}>查看更多»</Link>
+                        </div>
+                    }
                 </div>
 
                 <div className="panel">
@@ -204,9 +211,12 @@ class User extends Component {
                             }
                         })
                     }
-                    <div className="cell more">
-                        <Link className="dark" to={`/userTopic/${name}/replies`}>查看更多»</Link>
-                    </div>
+                    {
+                        userInfo.recent_replies && userInfo.recent_replies.length === 0 ? null :
+                        <div className="cell more">
+                            <Link className="dark" to={`/userTopic/${name}/replies`}>查看更多»</Link>
+                        </div>
+                    }
                 </div>
             </div>
         );

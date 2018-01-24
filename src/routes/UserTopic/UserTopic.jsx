@@ -17,19 +17,16 @@ class Home extends Component {
     }
     componentWillMount = async () => {
         let { name, type } = this.props.match.params;
-        // this.getUser({username: name});
+        await this.changeSider(true, false, name);
         switch (type) {
             case 'collections':
-                await this.changeSider(false, name);
                 this.userCollect({username: name});
-                this.changeSider(false, name);
                 this.setState({
                     title: `${name} 收藏的话题`,
                     header: `${name} 收藏的话题`
                 });
                 break;
             case 'topics':
-                await this.changeSider(false, name);
                 this.getRecent({username: name});
                 this.setState({
                     title: `${name} 的主页`,
@@ -37,7 +34,6 @@ class Home extends Component {
                 });
                 break;
             case 'replies':
-                await this.changeSider(false, name);
                 this.getRecent({username: name});
                 this.setState({
                     title: `${name} 的主页`,
@@ -47,7 +43,6 @@ class Home extends Component {
             default:
                 break;
         }
-        // this.changeSider(false, name);
     }
     userCollect = (options) => {
         const { userCollect } = this.props;
@@ -57,20 +52,21 @@ class Home extends Component {
         const { getRecent } = this.props;
         getRecent(options);
     }
-    changeSider = (isAuthor, name) => {
+    changeSider = (showInfo, isAuthor, name) => {
         const { getInfo, authorOrInfo } = this.props;
         authorOrInfo({
-            isAuthor: false,
+            isAuthor,
+            showInfo,
         });
-        if (name !== '') {
+        if (name) {
             getInfo({
                 username: name
             });
         }
     }
-    componentWillUnmount = async () => {
+    componentWillUnmount = () => {
         const { accessInfo } = this.props;
-        await this.changeSider(false, accessInfo.loginname);
+        this.changeSider(true, false, accessInfo.loginname);
     }
     render() {
         let { type, name } = this.props.match.params;

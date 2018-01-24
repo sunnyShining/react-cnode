@@ -17,6 +17,7 @@ export default {
 		    score: 0
 		},
 		isAuthor: false,
+		showInfo: false,
 		count: {
 			data: 0
 		},
