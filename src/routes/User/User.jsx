@@ -9,11 +9,11 @@ import * as app from '../../redux/actions/app';
 import { fromNow } from '../../utils/utils';
 
 class User extends Component {
-    componentWillMount = () => {
+    componentWillMount = async () => {
         let name = this.props.match.params.name;
+        await this.changeSider(false, name);
         this.getUser({username: name});
         this.userCollect({username: name});
-        this.changeSider(false, name);
     }
     getUser = (options) => {
         const { getUser } = this.props;
@@ -59,7 +59,7 @@ class User extends Component {
                             <ul className="unstyled">
                                 <span className="big">{userInfo.score}</span> 积分
                                 <li>
-                                    <Link className="dark" to={`/user/${userInfo.loginname}/collections`} target="_blank">
+                                    <Link className="dark" to={`/userTopic/${userInfo.loginname}/collections`}>
                                         <span className="big collect-topic-count">{collect.length}</span>个话题收藏
                                     </Link>
                                 </li>
@@ -116,17 +116,17 @@ class User extends Component {
                                             {
                                                 (() => {
                                                     if (item.top) {
-                                                        return (<span className="put_top">置顶&nbsp;</span>);
+                                                        return (<span className="put_top">&nbsp;置顶&nbsp;</span>);
                                                     } else if (item.good) {
-                                                        return (<span className="put_good">精华&nbsp;</span>);
+                                                        return (<span className="put_good">&nbsp;精华&nbsp;</span>);
                                                     } else if (item.tab === 'share') {
-                                                        return (<span className="topiclist-tab">分享&nbsp;</span>);
+                                                        return (<span className="topiclist-tab">&nbsp;分享&nbsp;</span>);
                                                     } else if (item.tab === 'ask') {
-                                                        return (<span className="topiclist-tab">问答&nbsp;</span>);
+                                                        return (<span className="topiclist-tab">&nbsp;问答&nbsp;</span>);
                                                     } else if (item.tab === 'job') {
-                                                        return (<span className="topiclist-tab">工作&nbsp;</span>);
+                                                        return (<span className="topiclist-tab">&nbsp;工作&nbsp;</span>);
                                                     } else if (item.tab === 'dev') {
-                                                        return (<span className="topiclist-tab">测试&nbsp;</span>);
+                                                        return (<span className="topiclist-tab">&nbsp;测试&nbsp;</span>);
                                                     } else {
                                                         return null;
                                                     }
@@ -144,7 +144,7 @@ class User extends Component {
                         })
                     }
                     <div className="cell more">
-                        <Link className="dark" to={`/user/${name}/topics`}>查看更多»</Link>
+                        <Link className="dark" to={`/userTopic/${name}/topics`}>查看更多»</Link>
                     </div>
                 </div>
 
@@ -205,7 +205,7 @@ class User extends Component {
                         })
                     }
                     <div className="cell more">
-                        <Link className="dark" to={`/user/${name}/replies`}>查看更多»</Link>
+                        <Link className="dark" to={`/userTopic/${name}/replies`}>查看更多»</Link>
                     </div>
                 </div>
             </div>

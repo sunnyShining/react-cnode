@@ -69,7 +69,9 @@ export default {
 		    recent_topics: [],
 		    score: 0
 		},
-		collect: []
+		collect: [],
+		recentReplies: [],
+		recentTopics: []
 	},
 	create: {
 		status: {},

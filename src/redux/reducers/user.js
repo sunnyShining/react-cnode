@@ -12,6 +12,12 @@ export const user = (state = initData.user, action) => {
                 ...state,
                 collect: action.payload.collect
             };
+        case 'GET_RECENT':
+            return {
+                ...state,
+                recentTopics: action.payload.recentTopics,
+                recentReplies: action.payload.recentReplies,
+            };
         default:
             return state
     }

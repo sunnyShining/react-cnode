@@ -20,14 +20,11 @@ import Api from '../Api/Api.jsx';
 import About from '../About/About.jsx';
 import Create from '../Create/Create.jsx';
 import Messages from '../Messages/Messages.jsx';
+import UserTopic from '../UserTopic/UserTopic.jsx';
 
 const history = createHistory()
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        console.log(123, history);
-    }
     componentWillMount = () => {
         this.tryLogin();
     }
@@ -42,7 +39,7 @@ class App extends Component {
             changeAccesstoken({
                 accesstoken
             });
-            if (history.location.pathname.indexOf('/user/') === -1) {
+            if (history.location.pathname.indexOf('/user') === -1) {
                 getInfo({
                     username: accessInfo.loginname
                 });
@@ -78,6 +75,7 @@ class App extends Component {
                                 <Route path='/about'  component={About}/>
                                 <Route path='/create/:id' component={Create}/>
                                 <Route path='/messages' component={Messages}/>
+                                <Route path='/userTopic/:name/:type' component={UserTopic}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
