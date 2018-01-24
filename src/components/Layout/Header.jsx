@@ -42,10 +42,12 @@ class Header extends Component {
                         await getInfo({
                             username: accessInfo.loginname
                         });
-                        window.location.reload();
                         Dialog.close();
                         Toast.info('登录成功！');
                         window.localStorage.setItem('accesstoken', accesstoken);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
                     } else {
                         Toast.info('accesstoken不正确，请重新输入！');
                     }
@@ -62,19 +64,17 @@ class Header extends Component {
             showInput: false,
             message: '确定要登出吗？',
             confirmButtonText: '确定',
-            confirmCallBack: async function (data) {
+            confirmCallBack(data) {
                 window.localStorage.removeItem('accesstoken');
-                const { getAccess } = self.props;
-                await getAccess({
-                    accesstoken: '',
-                });
                 const { changeAccesstoken } = self.props;
                 changeAccesstoken({
                     accesstoken: '',
                 });
                 Dialog.close();
                 Toast.info('登出成功！');
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             },
             cancelCallBack(accesstoken) {
                 Dialog.close();
