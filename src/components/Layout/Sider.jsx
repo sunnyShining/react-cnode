@@ -44,8 +44,10 @@ class Sider extends Component {
                         });
                         Dialog.close();
                         Toast.info('登录成功！');
-                        window.location.reload();
                         window.localStorage.setItem('accesstoken', accesstoken);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
                     } else {
                         Toast.info('accesstoken不正确，请重新输入！');
                     }

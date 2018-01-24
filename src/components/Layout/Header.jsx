@@ -64,8 +64,12 @@ class Header extends Component {
             showInput: false,
             message: '确定要登出吗？',
             confirmButtonText: '确定',
-            confirmCallBack(data) {
+            confirmCallBack: async function (data) {
                 window.localStorage.removeItem('accesstoken');
+                const { getAccess } = self.props;
+                await getAccess({
+                    accesstoken: ''
+                });
                 const { changeAccesstoken } = self.props;
                 changeAccesstoken({
                     accesstoken: '',
