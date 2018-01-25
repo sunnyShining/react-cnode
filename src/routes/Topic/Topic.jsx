@@ -9,17 +9,17 @@ import * as app from '../../redux/actions/app';
 import { fromNow } from '../../utils/utils';
 import Dialog from '../../components/Dialog/index';
 import Toast from '../../components/Toast/index';
-import LzEditor from 'react-lz-editor';
+import MarkdownEdit from '../../components/MarkdownEdit.jsx';
+import services from '../../services/services';
 
 class Topic extends Component {
     constructor(props){
         super(props);
         this.state = {
-            content: '',
-            content2: '',
             markdownContent: '',
-            markdownContent2: '',
             replyId: '',
+            status1: false,
+            status2: false
         };
     }
     signIn = () => {
@@ -110,38 +110,7 @@ class Topic extends Component {
     reply = (reply_id, loginname) => {
         this.setState({
             replyId: reply_id,
-            markdownContent: `@${loginname}`
-        });
-    }
-    reply2 = async (reply_id) => {
-        const { content, content2 } = this.state;
-        const { accesstoken, replies } = this.props;
-        let topicId = this.props.match.params.id;
-        let options;
-        if (reply_id !== '') {
-            options = {
-                reply_id,
-                accesstoken,
-                content,
-                topicId,
-            };
-        } else {
-            options = {
-                accesstoken,
-                content: content2,
-                topicId,
-            };
-        }
-        await replies(options);
-        this.fetchTopic({
-            id: topicId,
-            accesstoken,
-            mdrender: true
-        });
-        this.setState({
-            markdownContent: '',
-            markdownContent2: '',
-            replyId: ''
+            markdownContent: `@${loginname} `
         });
     }
     collect = async () => {
@@ -162,20 +131,60 @@ class Topic extends Component {
         };
         await deCollect(options);
     }
-    receiveMarkdown = (content) => {
-        this.setState({
-            content: content
+    replyCallback1 = async (content) => {
+        const { accesstoken } = this.props;
+        let topicId = this.props.match.params.id;
+        let options = {
+            accesstoken,
+            content,
+            topicId,
+        };
+        services.replies(options).then((data) => {
+            if(data.success) {
+                this.setState({
+                    status1: true
+                });
+                this.fetchTopic({
+                    id: topicId,
+                    accesstoken,
+                    mdrender: true
+                });
+            }
+        }, error => {
+            console.log(error);
         });
     }
-    receiveMarkdown2 = (content) => {
-        this.setState({
-            content2: content
+    replyCallback2 = (content) => {
+        const { accesstoken } = this.props;
+        let { replyId } = this.state
+        let topicId = this.props.match.params.id;
+        let options = {
+            reply_id: replyId,
+            accesstoken,
+            content,
+            topicId,
+        };
+        services.replies(options).then((data) => {
+            if(data.success) {
+                this.fetchTopic({
+                    id: topicId,
+                    accesstoken,
+                    mdrender: true
+                });
+                this.setState({
+                    markdownContent: '',
+                    replyId: '',
+                    status2: true
+                });
+            }
+        }, error => {
+            console.log(error);
         });
     }
     render() {
         let { topic, accessInfo } = this.props;
         let id = this.props.match.params.id;
-        let { replyId, markdownContent, markdownContent2 } = this.state;
+        let { replyId, status1, status2, markdownContent } = this.state;
         return (
             <div>
                 <div className="panel">
@@ -291,17 +300,7 @@ class Topic extends Component {
                                                 replyId === item.id ?
                                                 <div className="markdown_editor in_editor">
                                                     <div className="markdown_in_editor">
-                                                        <LzEditor
-                                                          active={true}
-                                                          importContent={markdownContent}
-                                                          cbReceiver={this.receiveMarkdown}
-                                                          image={false}
-                                                          video={false}
-                                                          audio={false}
-                                                          convertFormat="markdown"/>
-                                                        <div className="editor_buttons">
-                                                            <input type="button" className="span-primary submit_btn" value="回复" onClick={() => {this.reply2(item.id)}} />
-                                                        </div>
+                                                        <MarkdownEdit btnValue="回复" plainText={markdownContent} status={status2} submitCallBack={(content) => {this.replyCallback2(content)}} />
                                                     </div>
                                                 </div> : null
                                             }
@@ -320,17 +319,7 @@ class Topic extends Component {
                             <div className="inner reply">
                                 <div className="markdown_editor in_editor">
                                     <div className="markdown_in_editor">
-                                        <LzEditor
-                                          active={true}
-                                          importContent={markdownContent2}
-                                          cbReceiver={this.receiveMarkdown2}
-                                          image={false}
-                                          video={false}
-                                          audio={false}
-                                          convertFormat="markdown"/>
-                                        <div className="editor_buttons">
-                                            <input type="button" className="span-primary submit_btn" value="回复" onClick={() => {this.reply2('')}} />
-                                        </div>
+                                          <MarkdownEdit btnValue="回复" status={status1} submitCallBack={(content) => {this.replyCallback1(content)}} />
                                     </div>
                                 </div>
                             </div>

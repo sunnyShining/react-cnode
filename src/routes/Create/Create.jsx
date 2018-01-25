@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import LzEditor from 'react-lz-editor';
 import * as create from '../../redux/actions/create';
 import * as app from '../../redux/actions/app';
 import Toast from '../../components/Toast/index';
+import MarkdownEdit from '../../components/MarkdownEdit.jsx';
 
 class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: '',
-            markdownContent: ''
+            markdownContent: '',
+            status: false
         };
     }
     componentWillMount = async () => {
@@ -51,14 +51,8 @@ class Create extends Component {
             });
         }
     }
-    receiveMarkdown = (content) => {
-        this.setState({
-            content: content
-        });
-    }
-    create = async () => {
+    create = async (content) => {
         const { accesstoken, createTopics, updateTopics } = this.props;
-        const { content } = this.state;
         let titleD = this.refs.title;
         let title = titleD.value;
         let tab = this.refs.tab && this.refs.tab.value;
@@ -84,13 +78,16 @@ class Create extends Component {
             await updateTopics(options);
             const { updateStatus, history } = this.props;
             if (updateStatus.success) {
+                this.setState({
+                    status: true
+                });
                 history.push('/home');
                 Toast.info('更新成功！');
             }
         }
     }
     render() {
-        let { markdownContent } = this.props;
+        let { markdownContent, status } = this.state;
         return (
             <div>
                 <div className="panel">
@@ -117,17 +114,7 @@ class Create extends Component {
                                 </p>
                                 <div className="markdown_editor in_editor">
                                     <div className="markdown_in_editor">
-                                        <LzEditor
-                                          active={true}
-                                          importContent={markdownContent}
-                                          cbReceiver={this.receiveMarkdown}
-                                          image={false}
-                                          video={false}
-                                          audio={false}
-                                          convertFormat="markdown"/>
-                                        <div className="editor_buttons">
-                                            <input type="button" className="span-primary submit_btn" value="提交" onClick={() => {this.create()}} />
-                                        </div>
+                                        <MarkdownEdit btnValue="提交" plainText={markdownContent} status={status} submitCallBack={(content) => {this.create(content)}} />
                                     </div>
                                 </div>
                             </fieldset>

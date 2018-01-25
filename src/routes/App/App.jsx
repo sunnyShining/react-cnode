@@ -21,6 +21,7 @@ import About from '../About/About.jsx';
 import Create from '../Create/Create.jsx';
 import Messages from '../Messages/Messages.jsx';
 import UserTopic from '../UserTopic/UserTopic.jsx';
+import Test from '../Test/Test.jsx';
 
 const history = createHistory()
 
@@ -71,6 +72,7 @@ class App extends Component {
                                 <Route path='/create/:id' component={Create}/>
                                 <Route path='/messages' component={Messages}/>
                                 <Route path='/userTopic/:name/:type' component={UserTopic}/>
+                                <Route path='/test' component={Test}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
