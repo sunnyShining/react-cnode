@@ -6,7 +6,27 @@ import PropTypes from 'prop-types';
 export default class Pagination extends Component {
 	render() {
         let { currentPage, handlePage, total } = this.props;
-        if (currentPage < 4) {
+        if (total <= 0 || total < currentPage) {
+            return null
+        } else if (total <= 5) {
+            let numbs = [];
+            for (let i = 1; i <= total; i++) {
+                numbs.push(i);
+            }
+            return (
+                <div className="pagination">
+                    <ul>
+                        <li className={classnames({'disabled': currentPage === 1})} onClick={() => {handlePage(1)}}><a>«</a></li>
+                        {
+                            numbs.map((item, index) => {
+                                return (<li className={classnames({'disabled active': currentPage === item})} onClick={() => {handlePage(item)}}><a>{item}</a></li>);
+                            })
+                        }
+                        <li className={classnames({'disabled': currentPage === total})} onClick={() => {handlePage(total)}}><a>»</a></li>
+                    </ul>
+                </div>
+            )
+        } else if (currentPage < 4) {
             return (
                 <div className="pagination">
                     <ul>
@@ -41,7 +61,7 @@ export default class Pagination extends Component {
             return (
                 <div className="pagination">
                     <ul>
-                        <li className="disabled"><a>«</a></li>
+                        <li onClick={() => {handlePage(1)}}><a>«</a></li>
                         <li onClick={() => {handlePage(currentPage - 2)}}><a>...</a></li>
                         <li className={classnames({'disabled active': currentPage === total - 4})} onClick={() => {handlePage(total - 4)}}><a>{total - 4}</a></li>
                         <li className={classnames({'disabled active': currentPage === total - 3})} onClick={() => {handlePage(total - 3)}}><a>{total - 3}</a></li>
