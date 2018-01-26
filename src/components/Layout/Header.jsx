@@ -102,7 +102,7 @@ class Header extends Component {
             <div className="navbar">
                 <div className="navbar-inner">
                     <div className="container">
-                        <Link className="brand" to="/">
+                        <Link className="brand" to="/home">
                             <img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="logo" />
                         </Link>
                         {/*<form id="search_form" className="navbar-search" action="/search">

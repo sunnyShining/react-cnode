@@ -95,7 +95,7 @@ class Sider extends Component {
                                     </div>
                                     <div className="panel">
                                         <div className="inner">
-                                            <Link to="/create" id="create_topic_btn">
+                                            <Link to="/create/new" id="create_topic_btn">
                                                 <span className="span-success">发布话题</span>
                                             </Link>
                                         </div>

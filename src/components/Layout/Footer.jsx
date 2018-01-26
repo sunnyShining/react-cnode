@@ -14,7 +14,7 @@ export default class Footer extends Component {
             <div id="footer">
                 <div id="footer_main">
                     <div className="links">
-                        <a className="dark" href="/rss">RSS</a>
+                        <a className="dark" href="//cnodejs.org/rss">RSS</a>
                         |
                         <a className="dark" href="https://github.com/cnodejs/nodeclub/">源码地址</a>
                     </div>
