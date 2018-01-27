@@ -1,3 +1,11 @@
+/**
+ * @author sunny
+ * @email 17765293970@163.com
+ * @create date 2018-01-27 10:18:39
+ * @modify date 2018-01-27 10:18:39
+ * @desc 全局入口
+*/
+
 import services from '../../services/services';
 const CHANGE_ACCESS = 'CHANGE_ACCESS';
 const GET_ACCESS = 'GET_ACCESS';

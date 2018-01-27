@@ -1,3 +1,11 @@
+/**
+ * @author sunny
+ * @email 17765293970@163.com
+ * @create date 2018-01-27 10:18:39
+ * @modify date 2018-01-27 10:18:39
+ * @desc 用户
+*/
+
 import services from '../../services/services';
 const GET_USER = 'GET_USER';
 const GET_COLLECT = 'GET_COLLECT';

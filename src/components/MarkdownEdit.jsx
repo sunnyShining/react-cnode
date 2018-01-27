@@ -3,7 +3,7 @@
  * @email 17765293970@163.com
  * @create date 2018-01-08 22:27:30
  * @modify date 2018-01-08 22:27:30
- * @desc 头部
+ * @desc 富文本编辑器
 */
 
 import React, { Component } from 'react';

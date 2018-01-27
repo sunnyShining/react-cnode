@@ -157,6 +157,7 @@ export default {
                 url,
                 qs: {},
                 mask: true,
+                notLoading: true
             }, (data) => {
                 resolve(data);
             });
