@@ -7,13 +7,22 @@
 */
 
 import React, { Component } from 'react';
+import './NoFound.less';
 
 export default class Test1 extends Component {
-  render() {
-    return (
-      <div className="App">
-       未发现
-      </div>
-    );
-  }
+	componentWillMount() {
+		let { history } = this.props;
+		setTimeout(() => {
+			history.replace('/home');
+		}, 1000);
+    }
+	 render() {
+		return (
+		  	<div className="panel">
+				<div className="error">
+					<h1>404<br/>Not Found</h1>
+				</div>
+			</div>
+		);
+	}
 }
