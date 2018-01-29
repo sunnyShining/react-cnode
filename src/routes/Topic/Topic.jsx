@@ -129,6 +129,11 @@ class Topic extends Component {
             accesstoken,
         };
         await collect(options);
+        this.fetchTopic({
+            id,
+            accesstoken,
+            mdrender: true
+        });
     }
     decollect = async () => {
         const id = this.props.match.params.id;
@@ -138,6 +143,11 @@ class Topic extends Component {
             accesstoken,
         };
         await deCollect(options);
+        this.fetchTopic({
+            id,
+            accesstoken,
+            mdrender: true
+        });
     }
     replyCallback1 = async (content) => {
         const { accesstoken } = this.props;

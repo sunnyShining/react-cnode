@@ -15,8 +15,8 @@ import './assets/css/style.less';
 import './assets/css/responsive.css';
 import './assets/css/font-awesome.less';
 import App from './routes/App/App.jsx';
-import registerServiceWorker from './utils/registerServiceWorker';
 import store from './redux/store/index';
+import registerServiceWorker from './utils/registerServiceWorker';
 
 ReactDOM.render(
 	<Provider store={ store }>
