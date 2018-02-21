@@ -13,16 +13,15 @@ import './Loading.less';
 
 export default class Loading extends Component {
 	render() {
-        let { tip } = this.props;
 		return (
             <div className="loading">
-                <div className="loading-mask">
-                    <div className="loading-outter">
-                        <div className="loading-wrap">
-                            <div className="loading-ring" />
-                        </div>
-                        <div className="loading-rect" />
-                        <div className="loading-text">{ tip }</div>
+                <div className="mask">
+                    <div className="outter">
+                        <span></span>&nbsp;
+                        <span></span>&nbsp;
+                        <span></span>&nbsp;
+                        <span></span>&nbsp;
+                        <span></span>
                     </div>
                 </div>
             </div>
@@ -30,9 +29,9 @@ export default class Loading extends Component {
 	}
 }
 
-Loading.propTypes = {
-    tip: PropTypes.string,
-};
+// Loading.propTypes = {
+//     tip: PropTypes.string,
+// };
 
 Loading.newInstance = function newLoadingInstance(properties) {
     let props = properties || {};

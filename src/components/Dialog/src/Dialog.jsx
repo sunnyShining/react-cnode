@@ -43,7 +43,7 @@ export default class Dialog extends Component {
                                         </div>
                                         <div className="dialog-input-btn">
                                             <input className="dialog-input-btn-cancel f-c666666 dialog-b-right" type="button" onClick={() => this.cancel()} value={cancelButtonText} />
-                                            <input className="dialog-input-btn-confirm f-cf37937" type="button" onClick={() => this.confirm()} value={confirmButtonText} />
+                                            <input className="dialog-input-btn-confirm f-cgreen" type="button" onClick={() => this.confirm()} value={confirmButtonText} />
                                         </div>
                                     </div>
                                 );
@@ -67,14 +67,14 @@ export default class Dialog extends Component {
                                             if(showOneBtn) {
                                                 return (
                                                     <div className="dialog-btn">
-                                                        <input type="button" style={{width: '100%'}} className="dialog-one-btn f-cf37937" value={oneBtnText} onClick={() => this.oneBtn()} />
+                                                        <input type="button" style={{width: '100%'}} className="dialog-one-btn f-cgreen" value={oneBtnText} onClick={() => this.oneBtn()} />
                                                     </div>
                                                 );
                                             } else {
                                                 return (
                                                     <div className="dialog-btn">
                                                         <input className="dialog-btn-cancel f-c666666 dialog-b-right" type="button" onClick={() => this.cancel()} value={cancelButtonText} />
-                                                        <input className="dialog-btn-confirm f-cf37937" type="button" onClick={() => this.confirm()} value={confirmButtonText} />
+                                                        <input className="dialog-btn-confirm f-cgreen" type="button" onClick={() => this.confirm()} value={confirmButtonText} />
                                                     </div>
                                                 );
                                             }
