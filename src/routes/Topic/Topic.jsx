@@ -44,7 +44,7 @@ class Topic extends Component {
                     await getAccess({
                         accesstoken
                     });
-                    const { accessInfo, changeAccesstoken, getInfo, getMessage } = self.props;
+                    const { accessInfo, changeAccesstoken, getMessage } = self.props;
                     if (accessInfo.success) {
                         changeAccesstoken({
                             accesstoken
