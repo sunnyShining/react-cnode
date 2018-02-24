@@ -123,17 +123,21 @@ class Topic extends Component {
     }
     collect = async () => {
         const id = this.props.match.params.id;
-        const { collect, accesstoken } = this.props;
+        const { collect, accesstoken, accessInfo } = this.props;
         const options = {
             topic_id: id,
             accesstoken,
         };
-        await collect(options);
-        this.fetchTopic({
-            id,
-            accesstoken,
-            mdrender: true
-        });
+        if (accessInfo.success) {
+            await collect(options);
+            this.fetchTopic({
+                id,
+                accesstoken,
+                mdrender: true
+            });
+        } else {
+            this.signIn();
+        }
     }
     decollect = async () => {
         const id = this.props.match.params.id;
