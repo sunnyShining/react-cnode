@@ -53,9 +53,9 @@ class Topic extends Component {
                             accesstoken,
                             mdrender: true
                         });
-                        await getInfo({
-                            username: accessInfo.loginname
-                        });
+                        // await getInfo({
+                        //     username: accessInfo.loginname
+                        // });
                         Dialog.close();
                         Toast.info('登录成功！');
                         window.localStorage.setItem('accesstoken', accesstoken);
