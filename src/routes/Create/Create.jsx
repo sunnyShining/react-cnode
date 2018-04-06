@@ -70,9 +70,6 @@ class Create extends Component {
             tab,
             content
         };
-        if (tab === '') {
-            Toast.info('请选择版块！')
-        }
         let id = this.props.match.params.id;
         if (id === 'new') {
             await createTopics(options);
