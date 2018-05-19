@@ -11,6 +11,7 @@ import { convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToMarkdown from 'draftjs-to-markdown';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import Modal from './Modal';
 
 export default class Test extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ export default class Test extends Component {
         let { editorState } = this.state;
         return (
             <div className="panel">
+                <Modal />
                 <Editor
                     editorState={editorState}
                     wrapperClassName="wrapper-area"
