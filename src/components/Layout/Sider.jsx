@@ -185,19 +185,19 @@ class Sider extends Component {
                         <ol className="friendship-community">
                             <li>
                                 <a href="https://ruby-china.org/" target="_blank" rel="noopener noreferrer">
-                                    <img src="//o4j806krb.qnssl.com/public/images/ruby-china-20150529.png" alt="" />
+                                    <img src="//static2.cnodejs.org/public/images/ruby-china-20150529.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>
                             <li>
                                 <a href="http://golangtc.com/" target="_blank" rel="noopener noreferrer">
-                                    <img src="//o4j806krb.qnssl.com/public/images/golangtc-logo.png" alt="" />
+                                    <img src="//static2.cnodejs.org/public/images/golangtc-logo.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>
                             <li>
                                 <a href="http://phphub.org/" target="_blank" rel="noopener noreferrer">
-                                    <img src="//o4j806krb.qnssl.com/public/images/phphub-logo.png" alt="" />
+                                    <img src="//static2.cnodejs.org/public/images/phphub-logo.png" alt="" />
                                 </a>
                             </li>
                             <div className="sep10"></div>

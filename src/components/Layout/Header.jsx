@@ -103,7 +103,7 @@ class Header extends Component {
                 <div className="navbar-inner">
                     <div className="container">
                         <Link className="brand" to="/home">
-                            <img src="//o4j806krb.qnssl.com/public/images/cnodejs_light.svg" alt="logo" />
+                            <img src="//static2.cnodejs.org/public/images/cnodejs_light.svg" alt="logo" />
                         </Link>
                         {/*<form id="search_form" className="navbar-search" action="/search">
                             <input type="text" id="q" name="q" className="search-query span3" value="" />
