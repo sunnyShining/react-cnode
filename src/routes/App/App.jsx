@@ -69,7 +69,7 @@ class App extends Component {
             <Router history={history}>
                 <div>
                     {device === 'iosApp' || device === 'androidApp' ? null : <Header />}
-                    <div id='main' style={device === 'iosApp' || device === 'androidApp' ? {marginTop: '0'} : {}}>
+                    <div id='main' style={device === 'iosApp' || device === 'androidApp' ? {marginTop: '2px'} : {}}>
                         {device === 'iosApp' || device === 'androidApp' ? null : <Sider />}
                         <div id='content'>
                             <Switch>
