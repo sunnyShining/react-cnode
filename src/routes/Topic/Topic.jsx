@@ -19,6 +19,7 @@ import Dialog from '../../components/Dialog/index';
 import Toast from '../../components/Toast/index';
 import MarkdownEdit from '../../components/MarkdownEdit.jsx';
 import services from '../../services/services';
+import { whatDevice } from '../../utils/utils';
 
 class Topic extends Component {
     constructor(props){
@@ -94,6 +95,7 @@ class Topic extends Component {
         const { fetchTopic } = this.props;
         await fetchTopic(options);
         const { topic } = this.props;
+        document.title = topic && topic.title;
         // 侧边栏
         this.changeSider(true, true, topic.author.loginname);
     }
@@ -202,6 +204,9 @@ class Topic extends Component {
         }, error => {
             console.log(error);
         });
+    }
+    componentWillUnmount () {
+        document.title = 'CNode：Node.js专业中文社区';
     }
     render() {
         let { topic, accessInfo } = this.props;

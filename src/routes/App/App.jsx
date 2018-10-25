@@ -30,8 +30,11 @@ import Create from '../Create/Create.jsx';
 import Messages from '../Messages/Messages.jsx';
 import UserTopic from '../UserTopic/UserTopic.jsx';
 import Test from '../Test/Test.jsx';
+import { whatDevice } from '../../utils/utils';
 
 const history = createHistory()
+
+const device = whatDevice();
 
 class App extends Component {
     componentWillMount = () => {
@@ -65,12 +68,12 @@ class App extends Component {
         return (
             <Router history={history}>
                 <div>
-                    <Header />
-                    <div id="main">
-                        <Sider />
-                        <div id="content">
+                    {device === 'iosApp' || device === 'androidApp' ? null : <Header />}
+                    <div id='main' style={device === 'iosApp' || device === 'androidApp' ? {marginTop: '0'} : {}}>
+                        {device === 'iosApp' || device === 'androidApp' ? null : <Sider />}
+                        <div id='content'>
                             <Switch>
-                                <Route exact path="/" render={() => (<Redirect to="/home" />)} />
+                                <Route exact path='/' render={() => (<Redirect to='/home' />)} />
                                 <Route path='/home'  component={Home}/>
                                 <Route path='/topic/:id'  component={Topic}/>
                                 <Route path='/user/:name'  component={User}/>
@@ -85,7 +88,7 @@ class App extends Component {
                             </Switch>
                         </div>
                     </div>
-                    <div id="backtotop">回到顶部</div>
+                    <div id='backtotop'>回到顶部</div>
                     <Footer />
                 </div>
             </Router>

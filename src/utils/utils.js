@@ -28,3 +28,20 @@ export function fromNow (time) {
     }
     return returnTime;
 }
+
+export function whatDevice () {
+    let device = '';
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (/MicroMessenger/i.test(ua)) {
+        device = 'wx';
+    } else if (/(iPhone|iPad|iPod|iOS)/i.test(ua) && /sunny/i.test(ua)) {
+            device = 'iosApp';
+    } else if (/(Android)/i.test(ua) && /sunny/i.test(ua)) {
+            device = 'androidApp';
+    } else if (/(iPhone|iPad|iPod|iOS)/i.test(ua)) {
+        device = 'ios';
+    } else if (/(Android)/i.test(ua)) {
+        device = 'android';
+    }
+    return device;
+}
