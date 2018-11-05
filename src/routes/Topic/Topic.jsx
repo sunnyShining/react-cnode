@@ -19,7 +19,7 @@ import Dialog from '../../components/Dialog/index';
 import Toast from '../../components/Toast/index';
 import MarkdownEdit from '../../components/MarkdownEdit.jsx';
 import services from '../../services/services';
-import { whatDevice } from '../../utils/utils';
+// import { whatDevice } from '../../utils/utils';
 
 class Topic extends Component {
     constructor(props){
